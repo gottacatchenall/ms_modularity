@@ -1,0 +1,33 @@
+project:
+  type: manuscript
+
+manuscript: 
+  article: index.qmd
+
+format:
+  html:
+    comments:
+      hypothesis: true
+    citations-hover: true
+    crossrefs-hover: true
+    #citation-location: margin
+    toc: true
+    toc-location: left
+    grid: 
+        margin-width: 350px
+    html-math-method: katex
+    #title-block-style: manuscript
+  docx: default
+  preprint-pdf:
+    number-sections: false
+    pdf-engine: pdflatex
+    mainfont: Latin Modern Roman
+    csl: https://www.zotero.org/styles/ecology-letters
+  jats: default
+
+
+execute:
+  freeze: true
+
+
+

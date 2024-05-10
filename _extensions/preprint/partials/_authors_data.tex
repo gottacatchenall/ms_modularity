@@ -1,0 +1,8 @@
+\vskip 1.5em
+
+$if(it.attributes.corresponding)$Author for correspondance\\$endif$
+$if(it.attributes.equal-contributor)$This author shares equal contribution$endif$
+
+$if(it.affiliations)$$for(it.affiliations)$%
+\textsuperscript{$it.number$} $it.name$$if(it.department)$, $it.department$$endif$\\%
+$endfor$$endif$
