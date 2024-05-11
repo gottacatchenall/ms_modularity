@@ -127,31 +127,33 @@ Annoying meta-analysis here.
 
 The state-of-the-art for community detection in networks are using a family of
 models called Stochastic Block Models (SBMs). Although the initial idea dates
-back several decades [@Holland1983StoBlo], modern research into using SBms for
+back several decades [@Holland1983StoBlo], modern research into using SBMs for
 community detection was spurred by regonition of the flaws with modularity
-maxmization [@Good2010PerMod].
-
-Bayes [@Hofman2008BayApp]
-
-Gets around the the issue of the resolution limit for multi-scale community
-detection with hierarchical/nested SBMs [@Peixoto2014HieBlo].
+maxmization [@Good2010PerMod]. SBMs have several advantages over modularity maximization. SBM inference is naturally posed as a Bayesian inference problem [@Hofman2008BayApp], which allows us to explicitly account for uncertainty in our estimate of the best node partition $\vec{b}$. Further, hierarchical SBMs [@Peixoto2014HieBlo], where each block is itself an SBM, enables multi-scale community detection. 
 
 ### What is a stochastic block model?
 
-SBMs are a _probabilistic generative model_, meaning given a set of input
-parameters, SBMs can be used to sample different possible realizations of
+SBMs are a _probabilistic generative model_. This means for a fixed set of input
+parameters, SBMs can be sampled to produce different possible realizations of
 networks from the _distribution_ of possible networks given the input
 parameters. In their simplest form, SBMs take a partition of the nodes into a
 groups $\vec{b}$, and a mixing or block matrix $\mathbf{M}$, where
 $\mathbf{M}_{b_i,b_j}$ is the probablity of an edge existing between nodes in
 groups $b_i$ and $b_j$ respectively. 
 
+This enables much more flexability in the types of community structure exist in networks. Modularity maximization can only capture _one type_ of community structure: assortative communities. In constract, SBMs can cover different forms of community structure in networks: [what is the best way to cite aaron here? idk]
 
-This enables much more flexability in the types of community structure exist in networks. Modularity maximization can only capture _one type_ of community structure, assortative communities.
+### How do we infer community structure from stochastic block models?
 
+We have a generative model
 
-$$P(\mathbf{A} \mid \mathbf{M}, \vec{b})$$
+$$P(\mathbf{A} \mid \theta)$$
 
+We can use Bayes theorem + some MCMC/SMC algorithm to sample from the posterior distribution $P(\theta | \mathbf{A})$
+
+To do this, we need to define the likelihood of observing some network $\mathbf{A}$ from a given community partition $\vec{b}$ and mixing matrix $\mathbf{M}$. 
+
+There are differences in the best way to do this depending on underlying assumptions:
 
 - Degree-corrected [@Karrer2011StoBlo].
 - bipartite [@Yen2020ComDet]
