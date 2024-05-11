@@ -25,7 +25,8 @@ abstract: |
 ## Introduction
 
 Ecosystems are composed of interactions between species and their environment.
-These interactions form networks that enable the persistence of _network
+These interactions form networks that enable the persistence of species, ecosystems, and the
+services ecosystems provide people. In the last few decades, _network
 science_  has developed to understand networks across a variety of domains. This
 field has  developed numerous quantitative tools for describing network
 structure, which have  seen increasing adoption in ecosystem science in the
