@@ -153,11 +153,18 @@ We can use Bayes theorem + some MCMC/SMC algorithm to sample from the posterior 
 
 To do this, we need to define the likelihood of observing some network $\mathbf{A}$ from a given community partition $\vec{b}$ and mixing matrix $\mathbf{M}$. 
 
-There are differences in the best way to do this depending on underlying assumptions:
+There are differences in the best way to define both likelihood and priors depending on underlying assumptions about network structure:
 
 - Degree-corrected [@Karrer2011StoBlo].
 - bipartite [@Yen2020ComDet]
+- hierarchical [@Peixoto2014HieBlo]
+
+
+
+end
+
 - Some use in ecological contexts (microbes) @Cobo-Lopez2022StoBlo.
+
 
 ## Acknowledgements
 
