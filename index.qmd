@@ -1,123 +1,160 @@
----
+--- 
 title: "Network modularity is widely misused in ecological analyses"
-authors:
-    -   name: Michael D. Catchen
-        orcid: 0000-0002-6506-6487
-        roles: writing
-        affiliation:
-            - ref: mcgill
-            - ref: qcbs
-            - ref: udem
+authors: 
+    -   name: Michael D. Catchen 
+        orcid: 0000-0002-6506-6487 
+        roles: writing 
+        affiliation: 
+            - ref: mcgill 
+            - ref: qcbs 
+            - ref: udem 
         corresponding: true
 
-bibliography: references.bib
-affiliations:
-    - id: mcgill
-      name: McGill University
-    - id: qcbs
-      name: Québec Centre for Biodiversity Science
-    - id: udem
-      name: Université de Montréal
-
-abstract:
-    |
-    Stop using modularity maximization.
+bibliography: references.bib 
+affiliations: 
+    -   id: mcgill 
+        name: McGill University
+    -   id: qcbs 
+        name: Québec Centre for Biodiversity Science 
+    -   id: udem 
+        name: Université de Montréal
+abstract: | 
+    Stop using modularity maximization. 
 ---
 
 ## Introduction
 
 Ecosystems are composed of interactions between species and their environment.
-These interactions form networks that enable the persistence of
-the system as a whole. In the last 30 years, the interdisciplinary field of
-_network science_ has developed to understand networks across a variety of
-domains. This field has developed numerous quantitative tools for describing
-network structure, which have seen increasing adoption in ecosystem science in
-the burgeoning subfield of network ecology [@Delmas2019AnaEco]. 
+These interactions form networks that enable the persistence of _network
+science_  has developed to understand networks across a variety of domains. This
+field has  developed numerous quantitative tools for describing network
+structure, which have  seen increasing adoption in ecosystem science in the
+burgeoning subfield of network  ecology [@Delmas2019AnaEco]. One such property
+is _modularity_ (denoted $Q$), which is a metric that describes "how well" nodes
+of a network can be grouped into _modules_, first introduced in
+@Newman2004FinEva. Modularity has been widely adopted as a metric of interest in
+ecological networks, and in principle the grouping of species into modules could
+contain biologically meaningful information.
 
-One such property is _modularity_ (denoted $Q$), which is a metric that
-describes how "how well" nodes of a network can be grouped into _modules_, first
-introduced in @Newman2004FinEva. Modularity has been widely adopted as a metric
-of interest in ecological networks, and in principle the grouping of
-species into modules could contain biologically meaningful information.
 Unfortunately, the most popular method identifying modules in ecological
-networks is Modularity Maximization (MM), which has fundemental flaws for
-robustly identifying modules in networks. 
+networks is Modularity Maximization (MM), which has many well documented flaws
+for robustly identifying modules in networks [@Good2010PerMod;
+@Fortunato2007ResLim; @Lancichinetti2011LimMod; @Peixoto2021DesVs].  Still, MM
+is widely used in network ecology. In a brief literature survey,  we found MM
+methods overwhelmingly prevelent in the analysis of ecological networks.  Here
+we cover what modularity maximization is, and why it doesn't work for
+identifying modules/groups in networks.  We suggest methods for community
+detection based on Stochastic Block Models
+[@Karrer2011StoBlo;@Peixoto2014HieBlo; @Yen2020ComDet] for identifying modules
+in ecological networks.
 
-This method originated during the mid-2000s [@Newman2004FinEva] and was
-popularized through the efficeincy of the Clauset-Newman-Moore (CNM)
-algorithm [@Clauset2004FinCom]. Six years later after its proposal,
-@Good2010PerMod showed that in practical contexts modularity maximization is
-flawed for all but idealized networks. More recently, @Peixoto2021DesVs more
-thoroughly explores this issue, showing how MM can massively overfit and find
-highly modular partitions ($Q \approx 0.5$) in random networks. 
+## What is modularity?
 
-Still, MM is widely used in ecological network papers. In a brief literature
-survey, we found MM methods overwhelmingly prevelent in the analysis of
-ecological networks.  Here we cover what modularity maximization is, and why it
-doesn't work for identifying modules/groups in networks. We suggest methods for
-community detection based on nested-stochastic-block-models (NSBMs) for
-identifying modules in ecological networks.
+Consider a directed network defined by an adjacency matrix $\mathbf{A}$, where
+$A_{ij} = 1$ if nodes $i$ and $j$ share an edge, and $0$ otherwise. Let $m =
+\sum_{i,j} A_{ij}$ denote the total number of edges in the network, and $k_i$ be
+the degree (the number of edges) associated with node $i$. Let $b_i$ denote the
+_group_ (or module) that node $i$ belongs to. Modularity ($Q$) is then defined
+as
 
-## What is modularity? 
+$$Q = \frac{1}{4m} \sum_{i,j} \bigg( A_{ij} - \frac{k_i k_j}{2m}\bigg)
+\delta(b_i, b_j)$$
 
-Consider a network defined by an adjacency matrix $\mathbf{A}$,
-where $A_{ij} = 1$ if nodes $i$ and $j$ share an edge, and $0$ otherwise. Let $m
-= \sum_{i,j} A_{ij}$ denote the total number of edges in the network, and
-$k_i$ be the degree (i.e. the number of edges) associated with node $i$.
-Let $g_i$ denote the _group_ (or module) that node $i$ belongs to. Modularity
-($Q$) is then defined as 
+where $\delta$ is a function that equals $1$ if $b_i = b_j$, and equals $0$
+otherwise. It is essential to emphasize that **modularity is not a property of a
+network _alone_**. It is only defined for a network _and a set of group
+assignments for each node_, $\vec{b}$.
 
-$$Q = \frac{1}{4m} \sum_{i,j} \bigg( A_{ij} - \frac{k_i k_j}{2m}\bigg) \delta(g_i, g_j)$$
-
-where $\delta$ is a function that equals $1$ if $g_i = g_j$, and equals $0$
-otherwise. This value can be interpreted intuitively as how many more edges exist
-between members of the same group than would be expected if edges were
-distributed "at random". As pointed out by @Peixoto2021DesVs, there is an
-implicit null model in what "at random" means in this definition, namely the Chung-Lu
-configuration model, where the probability of an edge existing between
-nodes $i$ and $j$ is $\mathbb{E}(A_{ij}) = \frac{k_i k_j}{2m}$.
-
-It is essential to emphasize that **modularity is not a property of a network
-_alone_**. It is only defined for a network _and a set of group assignments for
-each node_, $\vec{g}$. 
+This value can be interpreted intuitively as how many more edges exist between
+members of the same group than would be expected if edges were distributed "at
+random". As pointed out by @Peixoto2021DesVs, there is an implicit null model in
+what "at random" means in this definition, namely the Chung-Lu configuration
+model [@Chung2002ConCom], where the probability of an edge existing between
+nodes $i$ and $j$ is $\mathbb{E}[A_{ij}] = \frac{k_i k_j}{2m}$.
 
 ## What is modularity maximization?
 
 Modularity maximization (MM) is one of many potential methods for the problem of
-taking an observed network $\mathbf{A}$ and infering which group $g_i$ each node
+taking an observed network $\mathbf{A}$ and infering which group $b_i$ each node
 $i$ belongs to. In network science literature, this problem is called _community
-detection_.
-
-Other methods for community detection existed prior to MM, but MM took over.
-
+detection_. This method originated during the mid-2000s [@Newman2004FinEva] and
+was popularized through the efficeincy of the Clauset-Newman-Moore (CNM)
+algorithm [@Clauset2004FinCom]  and the Louvain algorithm [@Blondel2008FasUnf],
+both of which made implementation of MM feasible  for very large networks
+(hundreds or thousands of nodes). Six years later after its proposal,
+@Good2010PerMod (with Clauset, architect of CNM, as senior author) showed that
+in practical contexts modularity maximization is flawed for all but idealized
+networks. More recently, @Peixoto2021DesVs more thoroughly explores this issue,
+showing how MM can massively overfit and find highly modular partitions ($Q
+\approx 0.5$) in networks with no modular structure.
 
 ## Why doesn't modularity maximization work?
 
+As pointed out by @Peixoto2021DesVs, modularity maximization fails on two
+fronts: it simultaneously *overfits* (by finding clusters that have high
+modularity $Q$ but are entirely sporatic and unrelated to the mechanisms by
+which the network was generated) and *underfits* (by having a limit on the size
+of what communities are recoverable relative to the size of the whole network,
+called the _resolution limit_ [@Fortunato2007ResLim]).
+
+### Overfitting via a poor choice of objective function
+
 Degeneracy of the modularity function, lots of very similar local optima across
-widely different group partitions. 
+widely different group partitions.
 
-"The magnitude of the degeneracy problem, and the dependence of $Q_{max}$ on the size
-and number of modules in the network, suggests that modules identified through
-modularity maximization should be treated with caution in all but the most
-straightforward cases." @Good2010PerMod.
+"The magnitude of the degeneracy problem, and the dependence of $Q_{max}$ on the
+size and number of modules in the network, suggests that modules identified
+through modularity maximization should be treated with caution in all but the
+most straightforward cases." @Good2010PerMod.
 
+### Underfitting via the resolution limit
 
-## Modularity maximization is rampant.
+@Fortunato2007ResLim, @Lancichinetti2011LimMod
+
+## Modularity maximization is rampant in ecological network studies
 
 Annoying meta-analysis here.
 
-- Dormann and Strauss (2013) introduces method based on CNM
-- `bipartite` R package uses Beckett (2016), version of MM specifically for
-bipartite networks. 
-- `igraph` R package, CNM
-- `networkx` Python package, Louvain and CNM
+- Dormann and Strauss (2013) introduces method based on CNM 
+- `bipartite` R package uses Beckett (2016), version of MM specifically for bipartite
+  networks. 
+- `igraph` R package, 
+- CNM `networkx` Python package, Louvain and CNM
 - Guimerà & Amaral uses SA, widely cited.
 
+## What instead of modularity maximization?
 
-## Conclusion --- principled community detection is great, modularity is meaningless. 
+The state-of-the-art for community detection in networks are using a family of
+models called Stochastic Block Models (SBMs). Although the initial idea dates
+back several decades [@Holland1983StoBlo], modern research into using SBms for
+community detection was spurred by regonition of the flaws with modularity
+maxmization [@Good2010PerMod].
 
-What to do instead. SBMs are a much stronger basis to build module detection from.
+Bayes [@Hofman2008BayApp]
 
+Gets around the the issue of the resolution limit for multi-scale community
+detection with hierarchical/nested SBMs [@Peixoto2014HieBlo].
+
+### What is a stochastic block model?
+
+SBMs are a _probabilistic generative model_, meaning given a set of input
+parameters, SBMs can be used to sample different possible realizations of
+networks from the _distribution_ of possible networks given the input
+parameters. In their simplest form, SBMs take a partition of the nodes into a
+groups $\vec{b}$, and a mixing or block matrix $\mathbf{M}$, where
+$\mathbf{M}_{b_i,b_j}$ is the probablity of an edge existing between nodes in
+groups $b_i$ and $b_j$ respectively. 
+
+
+This enables much more flexability in the types of community structure exist in networks. Modularity maximization can only capture _one type_ of community structure, assortative communities.
+
+
+$$P(\mathbf{A} \mid \mathbf{M}, \vec{b})$$
+
+
+- Degree-corrected [@Karrer2011StoBlo].
+- bipartite [@Yen2020ComDet]
+- Some use in ecological contexts (microbes) @Cobo-Lopez2022StoBlo.
 
 ## Acknowledgements
 

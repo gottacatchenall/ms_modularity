@@ -19,7 +19,7 @@ format:
     #title-block-style: manuscript
   docx: default
   preprint-pdf:
-    number-sections: false
+    number-sections: true
     pdf-engine: pdflatex
     mainfont: Latin Modern Roman
     csl: https://www.zotero.org/styles/ecology-letters
