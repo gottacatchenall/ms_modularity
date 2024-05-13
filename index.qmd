@@ -100,6 +100,7 @@ called the _resolution limit_ [@Fortunato2007ResLim]).
 
 ### Overfitting via a poor choice of objective function
 
+
 Degeneracy of the modularity function, lots of very similar local optima across
 widely different group partitions.
 
@@ -108,20 +109,21 @@ size and number of modules in the network, suggests that modules identified
 through modularity maximization should be treated with caution in all but the
 most straightforward cases." @Good2010PerMod.
 
+
+![The issue with modularity maxmimization: there are many local optima with similar $Q$ values that correspond to qualitatively very different group partitions.]
+
+[The issue with modularity maxmimization: there are many local optima with similar $Q$ values that correspond to qualitatively very different group partitions.]: figures/bumpy.png {#fig-embedding}
+
 ### Underfitting via the resolution limit
 
-@Fortunato2007ResLim, @Lancichinetti2011LimMod
+The second issue with modularity maximization is that is cannot identify communities that at smaller than a certain size. The threshold for smallest community identifiable via MM is a function of the total size over the network, and called the "resolution limit" in the network science literature [@Fortunato2007ResLim; @Lancichinetti2011LimMod]. 
 
 ## Modularity maximization is rampant in ecological network studies
 
-Annoying meta-analysis here.
+We found in a survey of 50+ papers on ecological networks, modularity maximization is extremely common as the method for finding communities. The goal of this paper is not to shame or call-out specific papers, but to highlight that a widely adopted practice has fundemental flaws, and to advocate a principle alternative for community detection.
 
-- Dormann and Strauss (2013) introduces method based on CNM 
-- `bipartite` R package uses Beckett (2016), version of MM specifically for bipartite
-  networks. 
-- `igraph` R package, 
-- CNM `networkx` Python package, Louvain and CNM
-- Guimerà & Amaral uses SA, widely cited.
+We suspect MM is so prolific because it is widely available in many packages for network analysis, including `bipartite`, which uses a method for modularity maximization for bipartite networks proposed by @Dormann2014MetDet, and the very popular libraries `igraph` and `networkx`. Another widely applied method is from @Guimera2005FunCar, which uses simulated annealing for MM. The prolific availability of software to run MM-based community detection leads researchers down the "path of least resistance".
+
 
 ## What instead of modularity maximization?
 
@@ -141,33 +143,20 @@ groups $\vec{b}$, and a mixing or block matrix $\mathbf{M}$, where
 $\mathbf{M}_{b_i,b_j}$ is the probablity of an edge existing between nodes in
 groups $b_i$ and $b_j$ respectively. 
 
-This enables much more flexability in the types of community structure exist in networks. Modularity maximization can only capture _one type_ of community structure: assortative communities. In constract, SBMs can cover different forms of community structure in networks: [what is the best way to cite aaron here? idk]
+This enables much more flexability in the types of community structure exist in networks. Modularity maximization can only capture _one type_ of community structure---_assortative_ communities, where links within communities are more common that those between communities. In contrast, community structure in networks can take on a variety of different forms: assortative, disassortative (where _between group_ edges are more likely than _within group_), core-periphery (where a set of densely connected nodes form a 'core', and other 'periphery' nodes that have few edges and tend to be attached to core nodes ), and ordered (like trophic levels in a food-web).
+
+![Adapted from @Clauset2022LecNot. Shows how SBMs can account for community structure beyond simple assortativity.](./figures/blockmatrix.png)
+
 
 ### How do we infer community structure from stochastic block models?
 
-We have a generative model
+We can use Markov Chain Monte Carlo (MCMC) sampler to take an observed matrix $A$ and obtain an estimate of the posterior distribution of the mixing matrix and group assignments, $P(\mathbf{M}, \vec{b} | \mathbf{A})$. To do this, we need to define the likelihood of observing some network $\mathbf{A}$ from a given community partition $\vec{b}$,  and mixing matrix $\mathbf{M}$. There are differences in the best way to define both likelihood and priors depending on underlying assumptions about network structure.
 
-$$P(\mathbf{A} \mid \theta)$$
+For unipartite networks, a common version is the Degree-Corrected SBM [DC-SBM, @Karrer2011StoBlo], which explicitly accounts for the degree distribution by including the empirical degree sequence in the likelihood of observing each graph. @Yen2020ComDet develops a model specifically for bipartite networks, where the bipartite structure is directly incorporated into the generative model, improving performance for detecting communities in bipartite networks. Another promising line of research is hierarchical/nested SBMs (NSBMs), first proposed by @Peixoto2014HieBlo. In NSBMs, each "block" $\mathbf{M}_{b_i b_j}$ is _itself_ another SBM. This enables multi-scale community detection that can circumvent the issue of resolution limits from modularity maximization. 
 
-We can use Bayes theorem + some MCMC/SMC algorithm to sample from the posterior distribution $P(\theta | \mathbf{A})$
+## Conclusion
 
-To do this, we need to define the likelihood of observing some network $\mathbf{A}$ from a given community partition $\vec{b}$ and mixing matrix $\mathbf{M}$. 
+In summary, community detection is great, but modularity maximization is useless. There are times when modularity, as a method of quantifying the assortativity of edges in a graph given a set of group assignments $\vec{b}$, could correspond to an interesting ecological question. However, using modularity _as the criteria_ to select the group assignments is too unreliable to be the basis ecological conclusions. As an alterative, we should use _stochastic block models_ to infer the structure of modules within ecological networks. 
 
-There are differences in the best way to define both likelihood and priors depending on underlying assumptions about network structure:
-
-- Degree-corrected [@Karrer2011StoBlo].
-- bipartite [@Yen2020ComDet]
-- hierarchical [@Peixoto2014HieBlo]
-
-
-
-end
-
-- Some use in ecological contexts (microbes) @Cobo-Lopez2022StoBlo.
-
-
-## Acknowledgements
-
-Foo bar.
 
 ## References
