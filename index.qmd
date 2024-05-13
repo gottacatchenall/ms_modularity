@@ -77,7 +77,7 @@ nodes $i$ and $j$ is $\mathbb{E}[A_{ij}] = \frac{k_i k_j}{2m}$.
 
 Modularity maximization (MM) is one of many potential methods for the problem of
 taking an observed network $\mathbf{A}$ and infering which group $b_i$ each node
-$i$ belongs to (in network science literature, this problem is called _community
+$i$ belongs to, and how many total groups $|\vec{b}|$ there are total (in network science literature, this problem is called _community
 detection_). MM originated during the mid-2000s [@Newman2004FinEva] and
 was popularized through the efficeincy of the Clauset-Newman-Moore (CNM)
 algorithm [@Clauset2004FinCom]  and the Louvain algorithm [@Blondel2008FasUnf],
