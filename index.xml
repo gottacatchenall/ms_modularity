@@ -182,9 +182,9 @@ draft" vocab-term-identifier="https://credit.niso.org/contributor-roles/writing-
   <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>Q</mml:mi></mml:math></alternatives></inline-formula>)
   is then defined as</p>
   <p><disp-formula><alternatives>
-  <tex-math><![CDATA[Q = \frac{1}{2m} \sum_{i,j} \bigg( A_{ij} - \frac{k_i k_j}{m}\bigg)
+  <tex-math><![CDATA[Q = \frac{1}{2m} \sum_{i,j} \bigg( A_{ij} - \frac{k_i k_j}{2m}\bigg)
   \delta(b_i, b_j)]]></tex-math>
-  <mml:math display="block" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi>Q</mml:mi><mml:mo>=</mml:mo><mml:mfrac><mml:mn>1</mml:mn><mml:mrow><mml:mn>2</mml:mn><mml:mi>m</mml:mi></mml:mrow></mml:mfrac><mml:munder><mml:mo>∑</mml:mo><mml:mrow><mml:mi>i</mml:mi><mml:mo>,</mml:mo><mml:mi>j</mml:mi></mml:mrow></mml:munder><mml:mo minsize="2.4" maxsize="2.4" stretchy="false" form="prefix">(</mml:mo><mml:msub><mml:mi>A</mml:mi><mml:mrow><mml:mi>i</mml:mi><mml:mi>j</mml:mi></mml:mrow></mml:msub><mml:mo>−</mml:mo><mml:mfrac><mml:mrow><mml:msub><mml:mi>k</mml:mi><mml:mi>i</mml:mi></mml:msub><mml:msub><mml:mi>k</mml:mi><mml:mi>j</mml:mi></mml:msub></mml:mrow><mml:mi>m</mml:mi></mml:mfrac><mml:mo minsize="2.4" maxsize="2.4" stretchy="false" form="postfix">)</mml:mo><mml:mi>δ</mml:mi><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:msub><mml:mi>b</mml:mi><mml:mi>i</mml:mi></mml:msub><mml:mo>,</mml:mo><mml:msub><mml:mi>b</mml:mi><mml:mi>j</mml:mi></mml:msub><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow></mml:mrow></mml:math></alternatives></disp-formula></p>
+  <mml:math display="block" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi>Q</mml:mi><mml:mo>=</mml:mo><mml:mfrac><mml:mn>1</mml:mn><mml:mrow><mml:mn>2</mml:mn><mml:mi>m</mml:mi></mml:mrow></mml:mfrac><mml:munder><mml:mo>∑</mml:mo><mml:mrow><mml:mi>i</mml:mi><mml:mo>,</mml:mo><mml:mi>j</mml:mi></mml:mrow></mml:munder><mml:mo minsize="2.4" maxsize="2.4" stretchy="false" form="prefix">(</mml:mo><mml:msub><mml:mi>A</mml:mi><mml:mrow><mml:mi>i</mml:mi><mml:mi>j</mml:mi></mml:mrow></mml:msub><mml:mo>−</mml:mo><mml:mfrac><mml:mrow><mml:msub><mml:mi>k</mml:mi><mml:mi>i</mml:mi></mml:msub><mml:msub><mml:mi>k</mml:mi><mml:mi>j</mml:mi></mml:msub></mml:mrow><mml:mrow><mml:mn>2</mml:mn><mml:mi>m</mml:mi></mml:mrow></mml:mfrac><mml:mo minsize="2.4" maxsize="2.4" stretchy="false" form="postfix">)</mml:mo><mml:mi>δ</mml:mi><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:msub><mml:mi>b</mml:mi><mml:mi>i</mml:mi></mml:msub><mml:mo>,</mml:mo><mml:msub><mml:mi>b</mml:mi><mml:mi>j</mml:mi></mml:msub><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow></mml:mrow></mml:math></alternatives></disp-formula></p>
   <p>where <inline-formula><alternatives>
   <tex-math><![CDATA[\delta]]></tex-math>
   <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>δ</mml:mi></mml:math></alternatives></inline-formula>
@@ -234,9 +234,9 @@ draft" vocab-term-identifier="https://credit.niso.org/contributor-roles/writing-
   each node <inline-formula><alternatives>
   <tex-math><![CDATA[i]]></tex-math>
   <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>i</mml:mi></mml:math></alternatives></inline-formula>
-  belongs to. In network science literature, this problem is called
-  <italic>community detection</italic>. This method originated during
-  the mid-2000s
+  belongs to (in network science literature, this problem is called
+  <italic>community detection</italic>). MM originated during the
+  mid-2000s
   (<xref alt="Newman and Girvan 2004" rid="ref-Newman2004FinEva" ref-type="bibr">Newman
   and Girvan 2004</xref>) and was popularized through the efficeincy of
   the Clauset-Newman-Moore (CNM) algorithm
@@ -244,12 +244,13 @@ draft" vocab-term-identifier="https://credit.niso.org/contributor-roles/writing-
   Newman, and Moore 2004</xref>) and the Louvain algorithm
   (<xref alt="Blondel et al. 2008" rid="ref-Blondel2008FasUnf" ref-type="bibr">Blondel
   et al. 2008</xref>), both of which made implementation of MM feasible
-  for very large networks (hundreds or thousands of nodes). Six years
-  later after its proposal, Good, de Montjoye, and Clauset
+  for very large networks (at the time, hundreds or thousands of nodes).
+  Six years later after its proposal, Good, de Montjoye, and Clauset
   (<xref alt="2010" rid="ref-Good2010PerMod" ref-type="bibr">2010</xref>)
   (with Clauset, architect of CNM, as senior author) showed that in
-  practical contexts modularity maximization is flawed for all but
-  idealized networks. More recently, Peixoto
+  practice communities identified via modularity maximization are fataly
+  flawed for all but idealized networks, and advocated against its use
+  in “in all but the most straightforward cases”. More recently, Peixoto
   (<xref alt="2021" rid="ref-Peixoto2021DesVs" ref-type="bibr">2021</xref>)
   more thoroughly explores this issue, showing how MM can massively
   overfit and find highly modular partitions

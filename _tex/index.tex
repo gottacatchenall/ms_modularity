@@ -254,7 +254,7 @@ number of edges) associated with node \(i\). Let \(b_i\) denote the
 \emph{group} (or module) that node \(i\) belongs to. Modularity (\(Q\))
 is then defined as
 
-\[Q = \frac{1}{2m} \sum_{i,j} \bigg( A_{ij} - \frac{k_i k_j}{m}\bigg)
+\[Q = \frac{1}{2m} \sum_{i,j} \bigg( A_{ij} - \frac{k_i k_j}{2m}\bigg)
 \delta(b_i, b_j)\]
 
 where \(\delta\) is a function that equals \(1\) if \(b_i = b_j\), and
@@ -277,19 +277,21 @@ maximization?}\label{what-is-modularity-maximization}}
 
 Modularity maximization (MM) is one of many potential methods for the
 problem of taking an observed network \(\mathbf{A}\) and infering which
-group \(b_i\) each node \(i\) belongs to. In network science literature,
-this problem is called \emph{community detection}. This method
-originated during the mid-2000s (Newman \& Girvan 2004) and was
-popularized through the efficeincy of the Clauset-Newman-Moore (CNM)
-algorithm (Clauset \emph{et al.} 2004) and the Louvain algorithm
-(Blondel \emph{et al.} 2008), both of which made implementation of MM
-feasible for very large networks (hundreds or thousands of nodes). Six
-years later after its proposal, Good \emph{et al.} (2010) (with Clauset,
-architect of CNM, as senior author) showed that in practical contexts
-modularity maximization is flawed for all but idealized networks. More
-recently, Peixoto (2021) more thoroughly explores this issue, showing
-how MM can massively overfit and find highly modular partitions
-(\(Q \approx 0.5\)) in networks with no modular structure.
+group \(b_i\) each node \(i\) belongs to (in network science literature,
+this problem is called \emph{community detection}). MM originated during
+the mid-2000s (Newman \& Girvan 2004) and was popularized through the
+efficeincy of the Clauset-Newman-Moore (CNM) algorithm (Clauset \emph{et
+al.} 2004) and the Louvain algorithm (Blondel \emph{et al.} 2008), both
+of which made implementation of MM feasible for very large networks (at
+the time, hundreds or thousands of nodes). Six years later after its
+proposal, Good \emph{et al.} (2010) (with Clauset, architect of CNM, as
+senior author) showed that in practice communities identified via
+modularity maximization are fataly flawed for all but idealized
+networks, and advocated against its use in ``in all but the most
+straightforward cases''. More recently, Peixoto (2021) more thoroughly
+explores this issue, showing how MM can massively overfit and find
+highly modular partitions (\(Q \approx 0.5\)) in networks with no
+modular structure.
 
 \hypertarget{why-doesnt-modularity-maximization-work}{%
 \section{Why doesn't modularity maximization
