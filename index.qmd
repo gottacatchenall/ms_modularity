@@ -51,14 +51,14 @@ in ecological networks.
 
 ## What is modularity?
 
-Consider a directed network defined by an adjacency matrix $\mathbf{A}$, where
+Consider an undirected network defined by an adjacency matrix $\mathbf{A}$, where
 $A_{ij} = 1$ if nodes $i$ and $j$ share an edge, and $0$ otherwise. Let $m =
 \sum_{i,j} A_{ij}$ denote the total number of edges in the network, and $k_i$ be
 the degree (the number of edges) associated with node $i$. Let $b_i$ denote the
 _group_ (or module) that node $i$ belongs to. Modularity ($Q$) is then defined
 as
 
-$$Q = \frac{1}{4m} \sum_{i,j} \bigg( A_{ij} - \frac{k_i k_j}{2m}\bigg)
+$$Q = \frac{1}{2m} \sum_{i,j} \bigg( A_{ij} - \frac{k_i k_j}{m}\bigg)
 \delta(b_i, b_j)$$
 
 where $\delta$ is a function that equals $1$ if $b_i = b_j$, and equals $0$
