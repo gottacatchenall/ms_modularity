@@ -1,0 +1,784 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE article PUBLIC "-//NLM//DTD JATS (Z39.96) Journal Archiving
+and Interchange DTD v1.2 20190208//EN" "JATS-archivearticle1.dtd">
+
+<article xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xlink="http://www.w3.org/1999/xlink" dtd-version="1.2" article-type="other">
+
+<front>
+
+
+<article-meta>
+
+
+<title-group>
+<article-title>Network modularity is widely misused in ecological
+analyses</article-title>
+</title-group>
+
+<contrib-group>
+<contrib contrib-type="author" corresp="yes">
+<contrib-id contrib-id-type="orcid">0000-0002-6506-6487</contrib-id>
+<name>
+<surname>Catchen</surname>
+<given-names>Michael D.</given-names>
+</name>
+<string-name>Michael D. Catchen</string-name>
+
+<role vocab="https://credit.niso.org" vocab-term="writing – original
+draft" vocab-term-identifier="https://credit.niso.org/contributor-roles/writing-original-draft/">writing</role>
+<xref ref-type="aff" rid="mcgill">a</xref>
+<xref ref-type="aff" rid="qcbs">b</xref>
+<xref ref-type="aff" rid="udem">c</xref>
+<xref ref-type="corresp" rid="cor-1">&#x002A;</xref>
+</contrib>
+</contrib-group>
+<aff id="mcgill">
+<institution-wrap>
+<institution>McGill University</institution>
+</institution-wrap>
+
+
+
+
+
+
+
+</aff>
+<aff id="qcbs">
+<institution-wrap>
+<institution>Québec Centre for Biodiversity Science</institution>
+</institution-wrap>
+
+
+
+
+
+
+
+</aff>
+<aff id="udem">
+<institution-wrap>
+<institution>Université de Montréal</institution>
+</institution-wrap>
+
+
+
+
+
+
+
+</aff>
+<author-notes>
+<corresp id="cor-1"></corresp>
+</author-notes>
+
+
+
+
+
+
+
+
+
+<history></history>
+
+
+<abstract>
+<p>Stop using modularity maximization.</p>
+</abstract>
+
+
+
+
+</article-meta>
+
+</front>
+
+<body>
+<sec id="introduction">
+  <title>Introduction</title>
+  <p>Ecosystems are composed of interactions between species and their
+  environment. These interactions form networks that enable the
+  persistence of species, ecosystems, and the services ecosystems
+  provide people. In the last few decades, <italic>network
+  science</italic> has developed to understand networks across a variety
+  of domains. This field has developed numerous quantitative tools for
+  describing network structure, which have seen increasing adoption in
+  ecosystem science in the burgeoning subfield of network ecology
+  (<xref alt="Delmas et al. 2019" rid="ref-Delmas2019AnaEco" ref-type="bibr">Delmas
+  et al. 2019</xref>). One such property is <italic>modularity</italic>
+  (denoted <inline-formula><alternatives>
+  <tex-math><![CDATA[Q]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>Q</mml:mi></mml:math></alternatives></inline-formula>),
+  which is a metric that describes “how well” nodes of a network can be
+  grouped into <italic>modules</italic>, first introduced in Newman and
+  Girvan
+  (<xref alt="2004" rid="ref-Newman2004FinEva" ref-type="bibr">2004</xref>).
+  Modularity has been widely adopted as a metric of interest in
+  ecological networks, and in principle the grouping of species into
+  modules could contain biologically meaningful information.</p>
+  <p>Unfortunately, the most popular method identifying modules in
+  ecological networks is Modularity Maximization (MM), which has many
+  well documented flaws for robustly identifying modules in networks
+  (<xref alt="Good, de Montjoye, and Clauset 2010" rid="ref-Good2010PerMod" ref-type="bibr">Good,
+  de Montjoye, and Clauset 2010</xref>;
+  <xref alt="Fortunato and Barthélemy 2007" rid="ref-Fortunato2007ResLim" ref-type="bibr">Fortunato
+  and Barthélemy 2007</xref>;
+  <xref alt="Lancichinetti and Fortunato 2011" rid="ref-Lancichinetti2011LimMod" ref-type="bibr">Lancichinetti
+  and Fortunato 2011</xref>;
+  <xref alt="Peixoto 2021" rid="ref-Peixoto2021DesVs" ref-type="bibr">Peixoto
+  2021</xref>). Still, MM is widely used in network ecology. In a brief
+  literature survey, we found MM methods overwhelmingly prevelent in the
+  analysis of ecological networks. Here we cover what modularity
+  maximization is, and why it doesn’t work for identifying
+  modules/groups in networks. We suggest methods for community detection
+  based on Stochastic Block Models
+  (<xref alt="Karrer and Newman 2011" rid="ref-Karrer2011StoBlo" ref-type="bibr">Karrer
+  and Newman 2011</xref>;
+  <xref alt="Peixoto 2014" rid="ref-Peixoto2014HieBlo" ref-type="bibr">Peixoto
+  2014</xref>;
+  <xref alt="Yen and Larremore 2020" rid="ref-Yen2020ComDet" ref-type="bibr">Yen
+  and Larremore 2020</xref>) for identifying modules in ecological
+  networks.</p>
+</sec>
+<sec id="what-is-modularity">
+  <title>What is modularity?</title>
+  <p>Consider a directed network defined by an adjacency matrix
+  <inline-formula><alternatives>
+  <tex-math><![CDATA[\mathbf{A}]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>𝐀</mml:mi></mml:math></alternatives></inline-formula>,
+  where <inline-formula><alternatives>
+  <tex-math><![CDATA[A_{ij} = 1]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:msub><mml:mi>A</mml:mi><mml:mrow><mml:mi>i</mml:mi><mml:mi>j</mml:mi></mml:mrow></mml:msub><mml:mo>=</mml:mo><mml:mn>1</mml:mn></mml:mrow></mml:math></alternatives></inline-formula>
+  if nodes <inline-formula><alternatives>
+  <tex-math><![CDATA[i]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>i</mml:mi></mml:math></alternatives></inline-formula>
+  and <inline-formula><alternatives>
+  <tex-math><![CDATA[j]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>j</mml:mi></mml:math></alternatives></inline-formula>
+  share an edge, and <inline-formula><alternatives>
+  <tex-math><![CDATA[0]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mn>0</mml:mn></mml:math></alternatives></inline-formula>
+  otherwise. Let <inline-formula><alternatives>
+  <tex-math><![CDATA[m = \sum_{i,j} A_{ij}]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi>m</mml:mi><mml:mo>=</mml:mo><mml:msub><mml:mo>∑</mml:mo><mml:mrow><mml:mi>i</mml:mi><mml:mo>,</mml:mo><mml:mi>j</mml:mi></mml:mrow></mml:msub><mml:msub><mml:mi>A</mml:mi><mml:mrow><mml:mi>i</mml:mi><mml:mi>j</mml:mi></mml:mrow></mml:msub></mml:mrow></mml:math></alternatives></inline-formula>
+  denote the total number of edges in the network, and
+  <inline-formula><alternatives>
+  <tex-math><![CDATA[k_i]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:msub><mml:mi>k</mml:mi><mml:mi>i</mml:mi></mml:msub></mml:math></alternatives></inline-formula>
+  be the degree (the number of edges) associated with node
+  <inline-formula><alternatives>
+  <tex-math><![CDATA[i]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>i</mml:mi></mml:math></alternatives></inline-formula>.
+  Let <inline-formula><alternatives>
+  <tex-math><![CDATA[b_i]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:msub><mml:mi>b</mml:mi><mml:mi>i</mml:mi></mml:msub></mml:math></alternatives></inline-formula>
+  denote the <italic>group</italic> (or module) that node
+  <inline-formula><alternatives>
+  <tex-math><![CDATA[i]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>i</mml:mi></mml:math></alternatives></inline-formula>
+  belongs to. Modularity (<inline-formula><alternatives>
+  <tex-math><![CDATA[Q]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>Q</mml:mi></mml:math></alternatives></inline-formula>)
+  is then defined as</p>
+  <p><disp-formula><alternatives>
+  <tex-math><![CDATA[Q = \frac{1}{4m} \sum_{i,j} \bigg( A_{ij} - \frac{k_i k_j}{2m}\bigg)
+  \delta(b_i, b_j)]]></tex-math>
+  <mml:math display="block" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi>Q</mml:mi><mml:mo>=</mml:mo><mml:mfrac><mml:mn>1</mml:mn><mml:mrow><mml:mn>4</mml:mn><mml:mi>m</mml:mi></mml:mrow></mml:mfrac><mml:munder><mml:mo>∑</mml:mo><mml:mrow><mml:mi>i</mml:mi><mml:mo>,</mml:mo><mml:mi>j</mml:mi></mml:mrow></mml:munder><mml:mo minsize="2.4" maxsize="2.4" stretchy="false" form="prefix">(</mml:mo><mml:msub><mml:mi>A</mml:mi><mml:mrow><mml:mi>i</mml:mi><mml:mi>j</mml:mi></mml:mrow></mml:msub><mml:mo>−</mml:mo><mml:mfrac><mml:mrow><mml:msub><mml:mi>k</mml:mi><mml:mi>i</mml:mi></mml:msub><mml:msub><mml:mi>k</mml:mi><mml:mi>j</mml:mi></mml:msub></mml:mrow><mml:mrow><mml:mn>2</mml:mn><mml:mi>m</mml:mi></mml:mrow></mml:mfrac><mml:mo minsize="2.4" maxsize="2.4" stretchy="false" form="postfix">)</mml:mo><mml:mi>δ</mml:mi><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:msub><mml:mi>b</mml:mi><mml:mi>i</mml:mi></mml:msub><mml:mo>,</mml:mo><mml:msub><mml:mi>b</mml:mi><mml:mi>j</mml:mi></mml:msub><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow></mml:mrow></mml:math></alternatives></disp-formula></p>
+  <p>where <inline-formula><alternatives>
+  <tex-math><![CDATA[\delta]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>δ</mml:mi></mml:math></alternatives></inline-formula>
+  is a function that equals <inline-formula><alternatives>
+  <tex-math><![CDATA[1]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mn>1</mml:mn></mml:math></alternatives></inline-formula>
+  if <inline-formula><alternatives>
+  <tex-math><![CDATA[b_i = b_j]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mi>i</mml:mi></mml:msub><mml:mo>=</mml:mo><mml:msub><mml:mi>b</mml:mi><mml:mi>j</mml:mi></mml:msub></mml:mrow></mml:math></alternatives></inline-formula>,
+  and equals <inline-formula><alternatives>
+  <tex-math><![CDATA[0]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mn>0</mml:mn></mml:math></alternatives></inline-formula>
+  otherwise. It is essential to emphasize that <bold>modularity is not a
+  property of a network <italic>alone</italic></bold>. It is only
+  defined for a network <italic>and a set of group assignments for each
+  node</italic>, <inline-formula><alternatives>
+  <tex-math><![CDATA[\vec{b}]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mover><mml:mi>b</mml:mi><mml:mo accent="true">⃗</mml:mo></mml:mover></mml:math></alternatives></inline-formula>.</p>
+  <p>This value can be interpreted intuitively as how many more edges
+  exist between members of the same group than would be expected if
+  edges were distributed “at random”. As pointed out by Peixoto
+  (<xref alt="2021" rid="ref-Peixoto2021DesVs" ref-type="bibr">2021</xref>),
+  there is an implicit null model in what “at random” means in this
+  definition, namely the Chung-Lu configuration model
+  (<xref alt="Chung and Lu 2002" rid="ref-Chung2002ConCom" ref-type="bibr">Chung
+  and Lu 2002</xref>), where the probability of an edge existing between
+  nodes <inline-formula><alternatives>
+  <tex-math><![CDATA[i]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>i</mml:mi></mml:math></alternatives></inline-formula>
+  and <inline-formula><alternatives>
+  <tex-math><![CDATA[j]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>j</mml:mi></mml:math></alternatives></inline-formula>
+  is <inline-formula><alternatives>
+  <tex-math><![CDATA[\mathbb{E}[A_{ij}] = \frac{k_i k_j}{2m}]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi>𝔼</mml:mi><mml:mrow><mml:mo stretchy="true" form="prefix">[</mml:mo><mml:msub><mml:mi>A</mml:mi><mml:mrow><mml:mi>i</mml:mi><mml:mi>j</mml:mi></mml:mrow></mml:msub><mml:mo stretchy="true" form="postfix">]</mml:mo></mml:mrow><mml:mo>=</mml:mo><mml:mfrac><mml:mrow><mml:msub><mml:mi>k</mml:mi><mml:mi>i</mml:mi></mml:msub><mml:msub><mml:mi>k</mml:mi><mml:mi>j</mml:mi></mml:msub></mml:mrow><mml:mrow><mml:mn>2</mml:mn><mml:mi>m</mml:mi></mml:mrow></mml:mfrac></mml:mrow></mml:math></alternatives></inline-formula>.</p>
+</sec>
+<sec id="what-is-modularity-maximization">
+  <title>What is modularity maximization?</title>
+  <p>Modularity maximization (MM) is one of many potential methods for
+  the problem of taking an observed network
+  <inline-formula><alternatives>
+  <tex-math><![CDATA[\mathbf{A}]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>𝐀</mml:mi></mml:math></alternatives></inline-formula>
+  and infering which group <inline-formula><alternatives>
+  <tex-math><![CDATA[b_i]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:msub><mml:mi>b</mml:mi><mml:mi>i</mml:mi></mml:msub></mml:math></alternatives></inline-formula>
+  each node <inline-formula><alternatives>
+  <tex-math><![CDATA[i]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>i</mml:mi></mml:math></alternatives></inline-formula>
+  belongs to. In network science literature, this problem is called
+  <italic>community detection</italic>. This method originated during
+  the mid-2000s
+  (<xref alt="Newman and Girvan 2004" rid="ref-Newman2004FinEva" ref-type="bibr">Newman
+  and Girvan 2004</xref>) and was popularized through the efficeincy of
+  the Clauset-Newman-Moore (CNM) algorithm
+  (<xref alt="Clauset, Newman, and Moore 2004" rid="ref-Clauset2004FinCom" ref-type="bibr">Clauset,
+  Newman, and Moore 2004</xref>) and the Louvain algorithm
+  (<xref alt="Blondel et al. 2008" rid="ref-Blondel2008FasUnf" ref-type="bibr">Blondel
+  et al. 2008</xref>), both of which made implementation of MM feasible
+  for very large networks (hundreds or thousands of nodes). Six years
+  later after its proposal, Good, de Montjoye, and Clauset
+  (<xref alt="2010" rid="ref-Good2010PerMod" ref-type="bibr">2010</xref>)
+  (with Clauset, architect of CNM, as senior author) showed that in
+  practical contexts modularity maximization is flawed for all but
+  idealized networks. More recently, Peixoto
+  (<xref alt="2021" rid="ref-Peixoto2021DesVs" ref-type="bibr">2021</xref>)
+  more thoroughly explores this issue, showing how MM can massively
+  overfit and find highly modular partitions
+  (<inline-formula><alternatives>
+  <tex-math><![CDATA[Q \approx 0.5]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi>Q</mml:mi><mml:mo>≈</mml:mo><mml:mn>0.5</mml:mn></mml:mrow></mml:math></alternatives></inline-formula>)
+  in networks with no modular structure.</p>
+</sec>
+<sec id="why-doesnt-modularity-maximization-work">
+  <title>Why doesn’t modularity maximization work?</title>
+  <p>As pointed out by Peixoto
+  (<xref alt="2021" rid="ref-Peixoto2021DesVs" ref-type="bibr">2021</xref>),
+  modularity maximization fails on two fronts: it simultaneously
+  <italic>overfits</italic> (by finding clusters that have high
+  modularity <inline-formula><alternatives>
+  <tex-math><![CDATA[Q]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>Q</mml:mi></mml:math></alternatives></inline-formula>
+  but are entirely sporatic and unrelated to the mechanisms by which the
+  network was generated) and <italic>underfits</italic> (by having a
+  limit on the size of what communities are recoverable relative to the
+  size of the whole network, called the <italic>resolution
+  limit</italic>
+  (<xref alt="Fortunato and Barthélemy 2007" rid="ref-Fortunato2007ResLim" ref-type="bibr">Fortunato
+  and Barthélemy 2007</xref>)).</p>
+  <sec id="overfitting-via-a-poor-choice-of-objective-function">
+    <title>Overfitting via a poor choice of objective function</title>
+    <p>Degeneracy of the modularity function, lots of very similar local
+    optima across widely different group partitions.</p>
+    <p>“The magnitude of the degeneracy problem, and the dependence of
+    <inline-formula><alternatives>
+    <tex-math><![CDATA[Q_{max}]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:msub><mml:mi>Q</mml:mi><mml:mrow><mml:mi>m</mml:mi><mml:mi>a</mml:mi><mml:mi>x</mml:mi></mml:mrow></mml:msub></mml:math></alternatives></inline-formula>
+    on the size and number of modules in the network, suggests that
+    modules identified through modularity maximization should be treated
+    with caution in all but the most straightforward cases.” Good, de
+    Montjoye, and Clauset
+    (<xref alt="2010" rid="ref-Good2010PerMod" ref-type="bibr">2010</xref>).</p>
+    <fig id="fig-embedding">
+      <caption><p>Figure 1: The issue with modularity maxmimization:
+      there are many local optima with similar
+      <inline-formula><alternatives>
+      <tex-math><![CDATA[Q]]></tex-math>
+      <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>Q</mml:mi></mml:math></alternatives></inline-formula>
+      values that correspond to qualitatively very different group
+      partitions.</p></caption>
+      <graphic mimetype="image" mime-subtype="png" xlink:href="figures/bumpy.png" />
+    </fig>
+  </sec>
+  <sec id="underfitting-via-the-resolution-limit">
+    <title>Underfitting via the resolution limit</title>
+    <p>The second issue with modularity maximization is that is cannot
+    identify communities that at smaller than a certain size. The
+    threshold for smallest community identifiable via MM is a function
+    of the total size over the network, and called the “resolution
+    limit” in the network science literature
+    (<xref alt="Fortunato and Barthélemy 2007" rid="ref-Fortunato2007ResLim" ref-type="bibr">Fortunato
+    and Barthélemy 2007</xref>;
+    <xref alt="Lancichinetti and Fortunato 2011" rid="ref-Lancichinetti2011LimMod" ref-type="bibr">Lancichinetti
+    and Fortunato 2011</xref>).</p>
+  </sec>
+</sec>
+<sec id="modularity-maximization-is-rampant-in-ecological-network-studies">
+  <title>Modularity maximization is rampant in ecological network
+  studies</title>
+  <p>We found in a survey of 50+ papers on ecological networks,
+  modularity maximization is extremely common as the method for finding
+  communities. The goal of this paper is not to shame or call-out
+  specific papers, but to highlight that a widely adopted practice has
+  fundemental flaws, and to advocate a principle alternative for
+  community detection.</p>
+  <p>We suspect MM is so prolific because it is widely available in many
+  packages for network analysis, including
+  <monospace>bipartite</monospace>, which uses a method for modularity
+  maximization for bipartite networks proposed by Dormann and Strauss
+  (<xref alt="2014" rid="ref-Dormann2014MetDet" ref-type="bibr">2014</xref>),
+  and the very popular libraries <monospace>igraph</monospace> and
+  <monospace>networkx</monospace>. Another widely applied method is from
+  Guimerà and Nunes Amaral
+  (<xref alt="2005" rid="ref-Guimera2005FunCar" ref-type="bibr">2005</xref>),
+  which uses simulated annealing for MM. The prolific availability of
+  software to run MM-based community detection leads researchers down
+  the “path of least resistance”.</p>
+</sec>
+<sec id="what-instead-of-modularity-maximization">
+  <title>What instead of modularity maximization?</title>
+  <p>The state-of-the-art for community detection in networks are using
+  a family of models called Stochastic Block Models (SBMs). Although the
+  initial idea dates back several decades
+  (<xref alt="Holland, Laskey, and Leinhardt 1983" rid="ref-Holland1983StoBlo" ref-type="bibr">Holland,
+  Laskey, and Leinhardt 1983</xref>), modern research into using SBMs
+  for community detection was spurred by regonition of the flaws with
+  modularity maxmization
+  (<xref alt="Good, de Montjoye, and Clauset 2010" rid="ref-Good2010PerMod" ref-type="bibr">Good,
+  de Montjoye, and Clauset 2010</xref>). SBMs have several advantages
+  over modularity maximization. SBM inference is naturally posed as a
+  Bayesian inference problem
+  (<xref alt="Hofman and Wiggins 2008" rid="ref-Hofman2008BayApp" ref-type="bibr">Hofman
+  and Wiggins 2008</xref>), which allows us to explicitly account for
+  uncertainty in our estimate of the best node partition
+  <inline-formula><alternatives>
+  <tex-math><![CDATA[\vec{b}]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mover><mml:mi>b</mml:mi><mml:mo accent="true">⃗</mml:mo></mml:mover></mml:math></alternatives></inline-formula>.
+  Further, hierarchical SBMs
+  (<xref alt="Peixoto 2014" rid="ref-Peixoto2014HieBlo" ref-type="bibr">Peixoto
+  2014</xref>), where each block is itself an SBM, enables multi-scale
+  community detection.</p>
+  <sec id="what-is-a-stochastic-block-model">
+    <title>What is a stochastic block model?</title>
+    <p>SBMs are a <italic>probabilistic generative model</italic>. This
+    means for a fixed set of input parameters, SBMs can be sampled to
+    produce different possible realizations of networks from the
+    <italic>distribution</italic> of possible networks given the input
+    parameters. In their simplest form, SBMs take a partition of the
+    nodes into a groups <inline-formula><alternatives>
+    <tex-math><![CDATA[\vec{b}]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mover><mml:mi>b</mml:mi><mml:mo accent="true">⃗</mml:mo></mml:mover></mml:math></alternatives></inline-formula>,
+    and a mixing or block matrix <inline-formula><alternatives>
+    <tex-math><![CDATA[\mathbf{M}]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>𝐌</mml:mi></mml:math></alternatives></inline-formula>,
+    where <inline-formula><alternatives>
+    <tex-math><![CDATA[\mathbf{M}_{b_i,b_j}]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:msub><mml:mi>𝐌</mml:mi><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mi>i</mml:mi></mml:msub><mml:mo>,</mml:mo><mml:msub><mml:mi>b</mml:mi><mml:mi>j</mml:mi></mml:msub></mml:mrow></mml:msub></mml:math></alternatives></inline-formula>
+    is the probablity of an edge existing between nodes in groups
+    <inline-formula><alternatives>
+    <tex-math><![CDATA[b_i]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:msub><mml:mi>b</mml:mi><mml:mi>i</mml:mi></mml:msub></mml:math></alternatives></inline-formula>
+    and <inline-formula><alternatives>
+    <tex-math><![CDATA[b_j]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:msub><mml:mi>b</mml:mi><mml:mi>j</mml:mi></mml:msub></mml:math></alternatives></inline-formula>
+    respectively.</p>
+    <p>This enables much more flexability in the types of community
+    structure exist in networks. Modularity maximization can only
+    capture <italic>one type</italic> of community
+    structure—<italic>assortative</italic> communities, where links
+    within communities are more common that those between communities.
+    In contrast, community structure in networks can take on a variety
+    of different forms: assortative, disassortative (where
+    <italic>between group</italic> edges are more likely than
+    <italic>within group</italic>), core-periphery (where a set of
+    densely connected nodes form a ‘core’, and other ‘periphery’ nodes
+    that have few edges and tend to be attached to core nodes ), and
+    ordered (like trophic levels in a food-web).</p>
+    <graphic mimetype="image" mime-subtype="png" xlink:href="./figures/blockmatrix.png">
+      <alt-text>Adapted from Clauset (2022). Shows how SBMs can account
+      for community structure beyond simple assortativity.</alt-text>
+    </graphic>
+  </sec>
+  <sec id="how-do-we-infer-community-structure-from-stochastic-block-models">
+    <title>How do we infer community structure from stochastic block
+    models?</title>
+    <p>We can use Markov Chain Monte Carlo (MCMC) sampler to take an
+    observed matrix <inline-formula><alternatives>
+    <tex-math><![CDATA[A]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>A</mml:mi></mml:math></alternatives></inline-formula>
+    and obtain an estimate of the posterior distribution of the mixing
+    matrix and group assignments, <inline-formula><alternatives>
+    <tex-math><![CDATA[P(\mathbf{M}, \vec{b} | \mathbf{A})]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mi>P</mml:mi><mml:mrow><mml:mo stretchy="true" form="prefix">(</mml:mo><mml:mi>𝐌</mml:mi><mml:mo>,</mml:mo><mml:mover><mml:mi>b</mml:mi><mml:mo accent="true">⃗</mml:mo></mml:mover><mml:mo stretchy="false" form="prefix">|</mml:mo><mml:mi>𝐀</mml:mi><mml:mo stretchy="true" form="postfix">)</mml:mo></mml:mrow></mml:mrow></mml:math></alternatives></inline-formula>.
+    To do this, we need to define the likelihood of observing some
+    network <inline-formula><alternatives>
+    <tex-math><![CDATA[\mathbf{A}]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>𝐀</mml:mi></mml:math></alternatives></inline-formula>
+    from a given community partition <inline-formula><alternatives>
+    <tex-math><![CDATA[\vec{b}]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mover><mml:mi>b</mml:mi><mml:mo accent="true">⃗</mml:mo></mml:mover></mml:math></alternatives></inline-formula>,
+    and mixing matrix <inline-formula><alternatives>
+    <tex-math><![CDATA[\mathbf{M}]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>𝐌</mml:mi></mml:math></alternatives></inline-formula>.
+    There are differences in the best way to define both likelihood and
+    priors depending on underlying assumptions about network
+    structure.</p>
+    <p>For unipartite networks, a common version is the Degree-Corrected
+    SBM (DC-SBM,
+    <xref alt="Karrer and Newman 2011" rid="ref-Karrer2011StoBlo" ref-type="bibr">Karrer
+    and Newman 2011</xref>), which explicitly accounts for the degree
+    distribution by including the empirical degree sequence in the
+    likelihood of observing each graph. Yen and Larremore
+    (<xref alt="2020" rid="ref-Yen2020ComDet" ref-type="bibr">2020</xref>)
+    develops a model specifically for bipartite networks, where the
+    bipartite structure is directly incorporated into the generative
+    model, improving performance for detecting communities in bipartite
+    networks. Another promising line of research is hierarchical/nested
+    SBMs (NSBMs), first proposed by Peixoto
+    (<xref alt="2014" rid="ref-Peixoto2014HieBlo" ref-type="bibr">2014</xref>).
+    In NSBMs, each “block” <inline-formula><alternatives>
+    <tex-math><![CDATA[\mathbf{M}_{b_i b_j}]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:msub><mml:mi>𝐌</mml:mi><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mi>i</mml:mi></mml:msub><mml:msub><mml:mi>b</mml:mi><mml:mi>j</mml:mi></mml:msub></mml:mrow></mml:msub></mml:math></alternatives></inline-formula>
+    is <italic>itself</italic> another SBM. This enables multi-scale
+    community detection that can circumvent the issue of resolution
+    limits from modularity maximization.</p>
+  </sec>
+</sec>
+<sec id="conclusion">
+  <title>Conclusion</title>
+  <p>In summary, community detection is great, but modularity
+  maximization is useless. There are times when modularity, as a method
+  of quantifying the assortativity of edges in a graph given a set of
+  group assignments <inline-formula><alternatives>
+  <tex-math><![CDATA[\vec{b}]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mover><mml:mi>b</mml:mi><mml:mo accent="true">⃗</mml:mo></mml:mover></mml:math></alternatives></inline-formula>,
+  could correspond to an interesting ecological question. However, using
+  modularity <italic>as the criteria</italic> to select the group
+  assignments is too unreliable to be the basis ecological conclusions.
+  As an alterative, we should use <italic>stochastic block
+  models</italic> to infer the structure of modules within ecological
+  networks.</p>
+</sec>
+<sec id="references">
+  <title>References</title>
+</sec>
+</body>
+
+<back>
+<ref-list>
+  <ref id="ref-Blondel2008FasUnf">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Blondel</surname><given-names>Vincent D.</given-names></name>
+        <name><surname>Guillaume</surname><given-names>Jean-Loup</given-names></name>
+        <name><surname>Lambiotte</surname><given-names>Renaud</given-names></name>
+        <name><surname>Lefebvre</surname><given-names>Etienne</given-names></name>
+      </person-group>
+      <article-title>Fast unfolding of communities in large networks</article-title>
+      <source>Journal of Statistical Mechanics: Theory and Experiment</source>
+      <year iso-8601-date="2008">2008</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2024-05-11">2024</year><month>05</month><day>11</day></date-in-citation>
+      <volume>2008</volume>
+      <issue>10</issue>
+      <issn>1742-5468</issn>
+      <uri>https://arxiv.org/abs/0803.0476</uri>
+      <pub-id pub-id-type="doi">10.1088/1742-5468/2008/10/P10008</pub-id>
+      <fpage>P10008</fpage>
+      <lpage></lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-Chung2002ConCom">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Chung</surname><given-names>Fan</given-names></name>
+        <name><surname>Lu</surname><given-names>Linyuan</given-names></name>
+      </person-group>
+      <article-title>Connected Components in Random Graphs with Given Expected Degree Sequences</article-title>
+      <source>Annals of Combinatorics</source>
+      <year iso-8601-date="2002">2002</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2024-05-11">2024</year><month>05</month><day>11</day></date-in-citation>
+      <volume>6</volume>
+      <issue>2</issue>
+      <issn>0218-0006</issn>
+      <pub-id pub-id-type="doi">10.1007/PL00012580</pub-id>
+      <fpage>125</fpage>
+      <lpage>145</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-Clauset2004FinCom">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Clauset</surname><given-names>Aaron</given-names></name>
+        <name><surname>Newman</surname><given-names>M. E. J.</given-names></name>
+        <name><surname>Moore</surname><given-names>Cristopher</given-names></name>
+      </person-group>
+      <article-title>Finding community structure in very large networks</article-title>
+      <source>Physical Review E</source>
+      <year iso-8601-date="2004">2004</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2020-08-21">2020</year><month>08</month><day>21</day></date-in-citation>
+      <volume>70</volume>
+      <issue>6</issue>
+      <issn>1539-3755, 1550-2376</issn>
+      <pub-id pub-id-type="doi">10.1103/PhysRevE.70.066111</pub-id>
+      <fpage>066111</fpage>
+      <lpage></lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-Clauset2022LecNot">
+    <element-citation>
+      <person-group person-group-type="author">
+        <name><surname>Clauset</surname><given-names>Aaron</given-names></name>
+      </person-group>
+      <article-title>Lecture Notes – Network Analysis and Modeling</article-title>
+      <year iso-8601-date="2022">2022</year>
+    </element-citation>
+  </ref>
+  <ref id="ref-Delmas2019AnaEco">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Delmas</surname><given-names>Eva</given-names></name>
+        <name><surname>Besson</surname><given-names>Mathilde</given-names></name>
+        <name><surname>Brice</surname><given-names>Marie-Hélène</given-names></name>
+        <name><surname>Burkle</surname><given-names>Laura A.</given-names></name>
+        <name><surname>Riva</surname><given-names>Giulio V. Dalla</given-names></name>
+        <name><surname>Fortin</surname><given-names>Marie-Josée</given-names></name>
+        <name><surname>Gravel</surname><given-names>Dominique</given-names></name>
+        <name><surname>Guimarães</surname><given-names>Paulo R.</given-names></name>
+        <name><surname>Hembry</surname><given-names>David H.</given-names></name>
+        <name><surname>Newman</surname><given-names>Erica A.</given-names></name>
+        <name><surname>Olesen</surname><given-names>Jens M.</given-names></name>
+        <name><surname>Pires</surname><given-names>Mathias M.</given-names></name>
+        <name><surname>Yeakel</surname><given-names>Justin D.</given-names></name>
+        <name><surname>Poisot</surname><given-names>Timothée</given-names></name>
+      </person-group>
+      <article-title>Analysing ecological networks of species interactions</article-title>
+      <source>Biological Reviews</source>
+      <year iso-8601-date="2019">2019</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2019-09-06">2019</year><month>09</month><day>06</day></date-in-citation>
+      <volume>94</volume>
+      <issue>1</issue>
+      <issn>1469-185X</issn>
+      <pub-id pub-id-type="doi">10.1111/brv.12433</pub-id>
+      <fpage>16</fpage>
+      <lpage>36</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-Dormann2014MetDet">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Dormann</surname><given-names>Carsten F.</given-names></name>
+        <name><surname>Strauss</surname><given-names>Rouven</given-names></name>
+      </person-group>
+      <article-title>A method for detecting modules in quantitative bipartite networks</article-title>
+      <source>Methods in Ecology and Evolution</source>
+      <year iso-8601-date="2014">2014</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2024-05-10">2024</year><month>05</month><day>10</day></date-in-citation>
+      <volume>5</volume>
+      <issue>1</issue>
+      <issn>2041-210X</issn>
+      <pub-id pub-id-type="doi">10.1111/2041-210X.12139</pub-id>
+      <fpage>90</fpage>
+      <lpage>98</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-Fortunato2007ResLim">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Fortunato</surname><given-names>Santo</given-names></name>
+        <name><surname>Barthélemy</surname><given-names>Marc</given-names></name>
+      </person-group>
+      <article-title>Resolution limit in community detection</article-title>
+      <source>Proceedings of the National Academy of Sciences of the United States of America</source>
+      <year iso-8601-date="2007">2007</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2024-05-10">2024</year><month>05</month><day>10</day></date-in-citation>
+      <volume>104</volume>
+      <issue>1</issue>
+      <issn>0027-8424</issn>
+      <pub-id pub-id-type="doi">10.1073/pnas.0605965104</pub-id>
+      <fpage>36</fpage>
+      <lpage>41</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-Good2010PerMod">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Good</surname><given-names>Benjamin H.</given-names></name>
+        <name><surname>de Montjoye</surname><given-names>Yves-Alexandre</given-names></name>
+        <name><surname>Clauset</surname><given-names>Aaron</given-names></name>
+      </person-group>
+      <article-title>The performance of modularity maximization in practical contexts</article-title>
+      <source>Physical Review E</source>
+      <year iso-8601-date="2010">2010</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2024-05-10">2024</year><month>05</month><day>10</day></date-in-citation>
+      <volume>81</volume>
+      <issue>4</issue>
+      <issn>1539-3755, 1550-2376</issn>
+      <uri>https://arxiv.org/abs/0910.0165</uri>
+      <pub-id pub-id-type="doi">10.1103/PhysRevE.81.046106</pub-id>
+      <fpage>046106</fpage>
+      <lpage></lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-Guimera2005FunCar">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Guimerà</surname><given-names>Roger</given-names></name>
+        <name><surname>Nunes Amaral</surname><given-names>Luís A.</given-names></name>
+      </person-group>
+      <article-title>Functional cartography of complex metabolic networks</article-title>
+      <source>Nature</source>
+      <publisher-name>Nature Publishing Group</publisher-name>
+      <year iso-8601-date="2005">2005</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2024-05-13">2024</year><month>05</month><day>13</day></date-in-citation>
+      <volume>433</volume>
+      <issue>7028</issue>
+      <issn>1476-4687</issn>
+      <pub-id pub-id-type="doi">10.1038/nature03288</pub-id>
+      <fpage>895</fpage>
+      <lpage>900</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-Hofman2008BayApp">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Hofman</surname><given-names>Jake M.</given-names></name>
+        <name><surname>Wiggins</surname><given-names>Chris H.</given-names></name>
+      </person-group>
+      <article-title>Bayesian Approach to Network Modularity</article-title>
+      <source>Physical Review Letters</source>
+      <year iso-8601-date="2008">2008</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2020-08-21">2020</year><month>08</month><day>21</day></date-in-citation>
+      <volume>100</volume>
+      <issue>25</issue>
+      <issn>0031-9007, 1079-7114</issn>
+      <pub-id pub-id-type="doi">10.1103/PhysRevLett.100.258701</pub-id>
+      <fpage>258701</fpage>
+      <lpage></lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-Holland1983StoBlo">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Holland</surname><given-names>Paul W.</given-names></name>
+        <name><surname>Laskey</surname><given-names>Kathryn Blackmond</given-names></name>
+        <name><surname>Leinhardt</surname><given-names>Samuel</given-names></name>
+      </person-group>
+      <article-title>Stochastic blockmodels: First steps</article-title>
+      <source>Social Networks</source>
+      <year iso-8601-date="1983">1983</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2024-05-11">2024</year><month>05</month><day>11</day></date-in-citation>
+      <volume>5</volume>
+      <issue>2</issue>
+      <issn>03788733</issn>
+      <pub-id pub-id-type="doi">10.1016/0378-8733(83)90021-7</pub-id>
+      <fpage>109</fpage>
+      <lpage>137</lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-Karrer2011StoBlo">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Karrer</surname><given-names>Brian</given-names></name>
+        <name><surname>Newman</surname><given-names>M. E. J.</given-names></name>
+      </person-group>
+      <article-title>Stochastic blockmodels and community structure in networks</article-title>
+      <source>Physical Review E</source>
+      <year iso-8601-date="2011">2011</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2024-05-11">2024</year><month>05</month><day>11</day></date-in-citation>
+      <volume>83</volume>
+      <issue>1</issue>
+      <issn>1539-3755, 1550-2376</issn>
+      <uri>https://arxiv.org/abs/1008.3926</uri>
+      <pub-id pub-id-type="doi">10.1103/PhysRevE.83.016107</pub-id>
+      <fpage>016107</fpage>
+      <lpage></lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-Lancichinetti2011LimMod">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Lancichinetti</surname><given-names>Andrea</given-names></name>
+        <name><surname>Fortunato</surname><given-names>Santo</given-names></name>
+      </person-group>
+      <article-title>Limits of modularity maximization in community detection</article-title>
+      <source>Physical Review E</source>
+      <year iso-8601-date="2011">2011</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2024-05-11">2024</year><month>05</month><day>11</day></date-in-citation>
+      <volume>84</volume>
+      <issue>6</issue>
+      <issn>1539-3755, 1550-2376</issn>
+      <pub-id pub-id-type="doi">10.1103/PhysRevE.84.066122</pub-id>
+      <fpage>066122</fpage>
+      <lpage></lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-Newman2004FinEva">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Newman</surname><given-names>M. E. J.</given-names></name>
+        <name><surname>Girvan</surname><given-names>M.</given-names></name>
+      </person-group>
+      <article-title>Finding and evaluating community structure in networks</article-title>
+      <source>Physical Review E</source>
+      <year iso-8601-date="2004">2004</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2024-05-10">2024</year><month>05</month><day>10</day></date-in-citation>
+      <volume>69</volume>
+      <issue>2</issue>
+      <issn>1539-3755, 1550-2376</issn>
+      <pub-id pub-id-type="doi">10.1103/PhysRevE.69.026113</pub-id>
+      <fpage>026113</fpage>
+      <lpage></lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-Peixoto2014HieBlo">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Peixoto</surname><given-names>Tiago P.</given-names></name>
+      </person-group>
+      <article-title>Hierarchical Block Structures and High-Resolution Model Selection in Large Networks</article-title>
+      <source>Physical Review X</source>
+      <publisher-name>American Physical Society</publisher-name>
+      <year iso-8601-date="2014">2014</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2024-05-11">2024</year><month>05</month><day>11</day></date-in-citation>
+      <volume>4</volume>
+      <issue>1</issue>
+      <pub-id pub-id-type="doi">10.1103/PhysRevX.4.011047</pub-id>
+      <fpage>011047</fpage>
+      <lpage></lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-Peixoto2021DesVs">
+    <element-citation>
+      <person-group person-group-type="author">
+        <name><surname>Peixoto</surname><given-names>Tiago P.</given-names></name>
+      </person-group>
+      <article-title>Descriptive vs. Inferential community detection in networks: Pitfalls, myths, and half-truths</article-title>
+      <source>arXiv.org</source>
+      <publisher-name>https://arxiv.org/abs/2112.00183v7</publisher-name>
+      <year iso-8601-date="2021">2021</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2024-05-10">2024</year><month>05</month><day>10</day></date-in-citation>
+      <pub-id pub-id-type="doi">10.1017/9781009118897</pub-id>
+    </element-citation>
+  </ref>
+  <ref id="ref-Yen2020ComDet">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Yen</surname><given-names>Tzu-Chi</given-names></name>
+        <name><surname>Larremore</surname><given-names>Daniel B.</given-names></name>
+      </person-group>
+      <article-title>Community detection in bipartite networks with stochastic block models</article-title>
+      <source>Physical Review E</source>
+      <year iso-8601-date="2020">2020</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2024-05-11">2024</year><month>05</month><day>11</day></date-in-citation>
+      <volume>102</volume>
+      <issue>3</issue>
+      <issn>2470-0045, 2470-0053</issn>
+      <pub-id pub-id-type="doi">10.1103/PhysRevE.102.032309</pub-id>
+      <fpage>032309</fpage>
+      <lpage></lpage>
+    </element-citation>
+  </ref>
+</ref-list>
+</back>
+
+
+
+</article>

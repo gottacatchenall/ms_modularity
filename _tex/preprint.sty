@@ -1,0 +1,27 @@
+\NeedsTeXFormat{LaTeX2e}
+
+\ProcessOptions\relax
+
+\titleformat{\section}{\sffamily}
+
+\usepackage[letterpaper]{geometry}
+
+\makeatletter
+\def\@maketitle{%
+  \newpage
+  \null
+  \vskip 2em%
+  \begin{flushleft}%
+  \let \footnote \thanks
+    {\Huge \bfseries \sffamily \@title \par}%
+    \vskip 1.5em%
+    {\normalsize
+      \lineskip .5em%
+      \begin{tabular}[t]{c}%
+        \@author
+      \end{tabular}\par}%
+    \vskip 1em%
+  \end{flushleft}%
+  \par
+  \vskip 1.5em}
+\makeatother
