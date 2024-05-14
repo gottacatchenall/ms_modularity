@@ -202,6 +202,8 @@ proposed by @Peixoto2014HieBlo. In NSBMs, each "block" $\mathbf{M}_{b_i b_j}$ is
 _itself_ another SBM. This enables multi-scale community detection that can
 circumvent the issue of resolution limits from modularity maximization.
 
+For a thorough review of block modeling, see @Lee2019RevSto.
+
 ## Conclusion
 
 In summary, community detection is great, but modularity maximization is
