@@ -43,7 +43,7 @@ for robustly identifying modules in networks [@Good2010PerMod;
 @Fortunato2007ResLim; @Lancichinetti2011LimMod; @Peixoto2021DesVs].
 
 As an alternative, we suggest methods for community detection based on
-Stochastic Block Models [@Karrer2011StoBlo;@Peixoto2014HieBlo; @Yen2020ComDet]
+Stochastic Block Models [@Karrer2011StoBlo; @Peixoto2014HieBlo; @Yen2020ComDet]
 for identifying modules in ecological networks.  Although they have seen some
 use in ecological networks [@Allesina2009FooWeb; @Gauzens2013FooAgg;
 @OConnor2020UnvFoo], modularity is still predominantly used in network ecology.
@@ -106,14 +106,13 @@ called the _resolution limit_ [@Fortunato2007ResLim]).
 
 ### Overfitting via a poor choice of objective function
 
-
-Degeneracy of the modularity function, lots of very similar local optima across
-widely different group partitions.
-
-"The magnitude of the degeneracy problem, and the dependence of $Q_{max}$ on the
-size and number of modules in the network, suggests that modules identified
+The first issue with modularity maximization is the the modularity function $Q$ 
+has many local optima, with similar values of $Q$, but which correspond to 
+qualitatively very different partitions $\vec{b}$. This was first reported in  
+@Good2010PerMod, who also show that $Q_max$ is highly dependent on the number of 
+clusters and the size of the network, and conclude---"[the] modules identified 
 through modularity maximization should be treated with caution in all but the
-most straightforward cases." @Good2010PerMod.
+most straightforward cases" [@Good2010PerMod].
 
 
 ![The issue with modularity maxmimization: there are many local optima with similar $Q$ values that correspond to qualitatively very different group partitions.]
