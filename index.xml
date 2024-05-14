@@ -288,17 +288,30 @@ draft" vocab-term-identifier="https://credit.niso.org/contributor-roles/writing-
   and Barthélemy 2007</xref>)).</p>
   <sec id="overfitting-via-a-poor-choice-of-objective-function">
     <title>Overfitting via a poor choice of objective function</title>
-    <p>Degeneracy of the modularity function, lots of very similar local
-    optima across widely different group partitions.</p>
-    <p>“The magnitude of the degeneracy problem, and the dependence of
+    <p>The first issue with modularity maximization is the the
+    modularity function <inline-formula><alternatives>
+    <tex-math><![CDATA[Q]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>Q</mml:mi></mml:math></alternatives></inline-formula>
+    has many local optima, with similar values of
     <inline-formula><alternatives>
-    <tex-math><![CDATA[Q_{max}]]></tex-math>
-    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:msub><mml:mi>Q</mml:mi><mml:mrow><mml:mi>m</mml:mi><mml:mi>a</mml:mi><mml:mi>x</mml:mi></mml:mrow></mml:msub></mml:math></alternatives></inline-formula>
-    on the size and number of modules in the network, suggests that
-    modules identified through modularity maximization should be treated
-    with caution in all but the most straightforward cases.” Good, de
-    Montjoye, and Clauset
-    (<xref alt="2010" rid="ref-Good2010PerMod" ref-type="bibr">2010</xref>).</p>
+    <tex-math><![CDATA[Q]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>Q</mml:mi></mml:math></alternatives></inline-formula>,
+    but which correspond to qualitatively very different partitions
+    <inline-formula><alternatives>
+    <tex-math><![CDATA[\vec{b}]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mover><mml:mi>b</mml:mi><mml:mo accent="true">⃗</mml:mo></mml:mover></mml:math></alternatives></inline-formula>.
+    This was first reported in
+    Good, de Montjoye, and Clauset
+    (<xref alt="2010" rid="ref-Good2010PerMod" ref-type="bibr">2010</xref>),
+    who also show that <inline-formula><alternatives>
+    <tex-math><![CDATA[Q_max]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:msub><mml:mi>Q</mml:mi><mml:mi>m</mml:mi></mml:msub><mml:mi>a</mml:mi><mml:mi>x</mml:mi></mml:mrow></mml:math></alternatives></inline-formula>
+    is highly dependent on the number of clusters and the size of the
+    network, and conclude—“[the] modules identified through modularity
+    maximization should be treated with caution in all but the most
+    straightforward cases”
+    (<xref alt="Good, de Montjoye, and Clauset 2010" rid="ref-Good2010PerMod" ref-type="bibr">Good,
+    de Montjoye, and Clauset 2010</xref>).</p>
     <fig id="fig-embedding">
       <caption><p>Figure 1: The issue with modularity maxmimization:
       there are many local optima with similar

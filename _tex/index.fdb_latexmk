@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1715699204 "/home/michael/Papers/ms_modularity_bad/_manuscript/_tex/index.tex" "index.pdf" "index" 1715699205
+["pdflatex"] 1715699763 "/home/michael/Papers/ms_modularity_bad/_manuscript/_tex/index.tex" "index.pdf" "index" 1715699764
   "/etc/texmf/web2c/texmf.cnf" 1662492346 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/michael/Papers/ms_modularity_bad/_manuscript/_tex/index.tex" 1715699202 24703 92b8806a11aee35a1576f3f491659dae ""
+  "/home/michael/Papers/ms_modularity_bad/_manuscript/_tex/index.tex" 1715699762 24696 af5444e7ad4bdbee520f26b3c24b1690 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm1000.tfm" 1136768653 3584 adb004a0c8e7c46ee66cad73671f37b4 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1246382020 916 f87d7c45f9c908e672703b83b72241a3 ""
@@ -147,10 +147,10 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1644012257 39432 7155514e09a3d69036fac785183a21c2 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1662492350 128028 f533b797fba58d231669ea19e894e23e ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1694436608 1405650 bff46ea8272a1af210bcacdfd7a7f4a3 ""
-  "figures/blockmatrix.png" 1715699202 390721 8c1841f65cfebf6cb6945452c7f09c3f ""
-  "figures/bumpy.png" 1715699202 351294 159fff4184310403f625d1348b86fb2c ""
-  "index.aux" 1715699205 9752 8906d2ae596b3a1ec1c2b5d7107d1f9b "pdflatex"
-  "index.tex" 1715699202 24703 92b8806a11aee35a1576f3f491659dae ""
+  "figures/blockmatrix.png" 1715699762 390721 8c1841f65cfebf6cb6945452c7f09c3f ""
+  "figures/bumpy.png" 1715699762 351294 159fff4184310403f625d1348b86fb2c ""
+  "index.aux" 1715699764 9752 8906d2ae596b3a1ec1c2b5d7107d1f9b "pdflatex"
+  "index.tex" 1715699762 24696 af5444e7ad4bdbee520f26b3c24b1690 ""
   (generated)
   "index.aux"
   "index.log"

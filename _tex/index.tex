@@ -315,14 +315,15 @@ to the size of the whole network, called the \emph{resolution limit}
 \subsection{Overfitting via a poor choice of objective
 function}\label{overfitting-via-a-poor-choice-of-objective-function}}
 
-Degeneracy of the modularity function, lots of very similar local optima
-across widely different group partitions.
-
-``The magnitude of the degeneracy problem, and the dependence of
-\(Q_{max}\) on the size and number of modules in the network, suggests
-that modules identified through modularity maximization should be
-treated with caution in all but the most straightforward cases.'' Good
-\emph{et al.} (2010).
+The first issue with modularity maximization is the the modularity
+function \(Q\) has many local optima, with similar values of \(Q\), but
+which correspond to qualitatively very different partitions \(\vec{b}\).
+This was first reported in\\
+Good \emph{et al.} (2010), who also show that \(Q_max\) is highly
+dependent on the number of clusters and the size of the network, and
+conclude---``{[}the{]} modules identified through modularity
+maximization should be treated with caution in all but the most
+straightforward cases'' (Good \emph{et al.} 2010).
 
 \begin{figure}
 
