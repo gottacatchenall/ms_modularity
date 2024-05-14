@@ -235,13 +235,18 @@ Unfortunately, the most popular method identifying modules in ecological
 networks is Modularity Maximization (MM), which has many well documented
 flaws for robustly identifying modules in networks (Fortunato \&
 Barthélemy 2007; Good \emph{et al.} 2010; Lancichinetti \& Fortunato
-2011; Peixoto 2021). Still, MM is widely used in network ecology. In a
-brief literature survey, we found MM methods overwhelmingly prevelent in
-the analysis of ecological networks. Here we cover what modularity
-maximization is, and why it doesn't work for identifying modules/groups
-in networks. We suggest methods for community detection based on
+2011; Peixoto 2021).
+
+As an alternative, we suggest methods for community detection based on
 Stochastic Block Models (Karrer \& Newman 2011; Peixoto 2014; Yen \&
-Larremore 2020) for identifying modules in ecological networks.
+Larremore 2020) for identifying modules in ecological networks. Although
+they have seen some use in ecological networks (Allesina \emph{et al.}
+2008; Gauzens \emph{et al.} 2013; O'Connor \emph{et al.} 2020),
+modularity is still predominantly used in network ecology. In a brief
+literature survey, we found MM methods overwhelmingly prevelent in the
+analysis of ecological networks. Here we cover what modularity
+maximization is, and why it doesn't work for identifying modules/groups
+in networks. We then provide a brief primer on stochastic block models.
 
 \hypertarget{what-is-modularity}{%
 \section{What is modularity?}\label{what-is-modularity}}
@@ -277,9 +282,10 @@ maximization?}\label{what-is-modularity-maximization}}
 
 Modularity maximization (MM) is one of many potential methods for the
 problem of taking an observed network \(\mathbf{A}\) and infering which
-group \(b_i\) each node \(i\) belongs to (in network science literature,
-this problem is called \emph{community detection}). MM originated during
-the mid-2000s (Newman \& Girvan 2004) and was popularized through the
+group \(b_i\) each node \(i\) belongs to, and how many total groups
+\(|\vec{b}|\) there are total (in network science literature, this
+problem is called \emph{community detection}). MM originated during the
+mid-2000s (Newman \& Girvan 2004) and was popularized through the
 efficeincy of the Clauset-Newman-Moore (CNM) algorithm (Clauset \emph{et
 al.} 2004) and the Louvain algorithm (Blondel \emph{et al.} 2008), both
 of which made implementation of MM feasible for very large networks (at
@@ -455,6 +461,11 @@ structure of modules within ecological networks.
 
 \hypertarget{refs}{}
 \begin{CSLReferences}{1}{0}
+\leavevmode\vadjust pre{\hypertarget{ref-Allesina2008GenMod}{}}%
+Allesina, S., Alonso, D. \& Pascual, M. (2008).
+\href{https://doi.org/10.1126/science.1156269}{A {General Model} for
+{Food Web Structure}}. \emph{Science}, 320, 658--661.
+
 \leavevmode\vadjust pre{\hypertarget{ref-Blondel2008FasUnf}{}}%
 Blondel, V.D., Guillaume, J.-L., Lambiotte, R. \& Lefebvre, E. (2008).
 \href{https://doi.org/10.1088/1742-5468/2008/10/P10008}{Fast unfolding
@@ -494,6 +505,11 @@ Fortunato, S. \& Barthélemy, M. (2007).
 community detection}. \emph{Proceedings of the National Academy of
 Sciences of the United States of America}, 104, 36--41.
 
+\leavevmode\vadjust pre{\hypertarget{ref-Gauzens2013FooAgg}{}}%
+Gauzens, B., Legendre, S., Lazzaro, X. \& Lacroix, G. (2013).
+\href{https://www.jstor.org/stable/24567396}{Food-web aggregation,
+methodological and functional issues}. \emph{Oikos}, 122, 1606--1615.
+
 \leavevmode\vadjust pre{\hypertarget{ref-Good2010PerMod}{}}%
 Good, B.H., de Montjoye, Y.-A. \& Clauset, A. (2010).
 \href{https://doi.org/10.1103/PhysRevE.81.046106}{The performance of
@@ -532,6 +548,13 @@ maximization in community detection}. \emph{Physical Review E}, 84,
 Newman, M.E.J. \& Girvan, M. (2004).
 \href{https://doi.org/10.1103/PhysRevE.69.026113}{Finding and evaluating
 community structure in networks}. \emph{Physical Review E}, 69, 026113.
+
+\leavevmode\vadjust pre{\hypertarget{ref-OConnor2020UnvFoo}{}}%
+O'Connor, L.M.J., Pollock, L.J., Braga, J., Ficetola, G.F., Maiorano,
+L., Martinez-Almoyna, C., \emph{et al.} (2020).
+\href{https://doi.org/10.1111/jbi.13773}{Unveiling the food webs of
+tetrapods across {Europe} through the prism of the {Eltonian} niche}.
+\emph{Journal of Biogeography}, 47, 181--192.
 
 \leavevmode\vadjust pre{\hypertarget{ref-Peixoto2014HieBlo}{}}%
 Peixoto, T.P. (2014).

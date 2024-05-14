@@ -127,19 +127,27 @@ draft" vocab-term-identifier="https://credit.niso.org/contributor-roles/writing-
   <xref alt="Lancichinetti and Fortunato 2011" rid="ref-Lancichinetti2011LimMod" ref-type="bibr">Lancichinetti
   and Fortunato 2011</xref>;
   <xref alt="Peixoto 2021" rid="ref-Peixoto2021DesVs" ref-type="bibr">Peixoto
-  2021</xref>). Still, MM is widely used in network ecology. In a brief
-  literature survey, we found MM methods overwhelmingly prevelent in the
-  analysis of ecological networks. Here we cover what modularity
-  maximization is, and why it doesn’t work for identifying
-  modules/groups in networks. We suggest methods for community detection
-  based on Stochastic Block Models
+  2021</xref>).</p>
+  <p>As an alternative, we suggest methods for community detection based
+  on Stochastic Block Models
   (<xref alt="Karrer and Newman 2011" rid="ref-Karrer2011StoBlo" ref-type="bibr">Karrer
   and Newman 2011</xref>;
   <xref alt="Peixoto 2014" rid="ref-Peixoto2014HieBlo" ref-type="bibr">Peixoto
   2014</xref>;
   <xref alt="Yen and Larremore 2020" rid="ref-Yen2020ComDet" ref-type="bibr">Yen
   and Larremore 2020</xref>) for identifying modules in ecological
-  networks.</p>
+  networks. Although they have seen some use in ecological networks
+  (<xref alt="Allesina, Alonso, and Pascual 2008" rid="ref-Allesina2008GenMod" ref-type="bibr">Allesina,
+  Alonso, and Pascual 2008</xref>;
+  <xref alt="Gauzens et al. 2013" rid="ref-Gauzens2013FooAgg" ref-type="bibr">Gauzens
+  et al. 2013</xref>;
+  <xref alt="O’Connor et al. 2020" rid="ref-OConnor2020UnvFoo" ref-type="bibr">O’Connor
+  et al. 2020</xref>), modularity is still predominantly used in network
+  ecology. In a brief literature survey, we found MM methods
+  overwhelmingly prevelent in the analysis of ecological networks. Here
+  we cover what modularity maximization is, and why it doesn’t work for
+  identifying modules/groups in networks. We then provide a brief primer
+  on stochastic block models.</p>
 </sec>
 <sec id="what-is-modularity">
   <title>What is modularity?</title>
@@ -234,7 +242,10 @@ draft" vocab-term-identifier="https://credit.niso.org/contributor-roles/writing-
   each node <inline-formula><alternatives>
   <tex-math><![CDATA[i]]></tex-math>
   <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>i</mml:mi></mml:math></alternatives></inline-formula>
-  belongs to (in network science literature, this problem is called
+  belongs to, and how many total groups <inline-formula><alternatives>
+  <tex-math><![CDATA[|\vec{b}|]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mo stretchy="true" form="prefix">|</mml:mo><mml:mover><mml:mi>b</mml:mi><mml:mo accent="true">⃗</mml:mo></mml:mover><mml:mo stretchy="true" form="postfix">|</mml:mo></mml:mrow></mml:math></alternatives></inline-formula>
+  there are total (in network science literature, this problem is called
   <italic>community detection</italic>). MM originated during the
   mid-2000s
   (<xref alt="Newman and Girvan 2004" rid="ref-Newman2004FinEva" ref-type="bibr">Newman
@@ -465,6 +476,25 @@ draft" vocab-term-identifier="https://credit.niso.org/contributor-roles/writing-
 
 <back>
 <ref-list>
+  <ref id="ref-Allesina2008GenMod">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Allesina</surname><given-names>S.</given-names></name>
+        <name><surname>Alonso</surname><given-names>D.</given-names></name>
+        <name><surname>Pascual</surname><given-names>M.</given-names></name>
+      </person-group>
+      <article-title>A General Model for Food Web Structure</article-title>
+      <source>Science</source>
+      <year iso-8601-date="2008">2008</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2020-07-08">2020</year><month>07</month><day>08</day></date-in-citation>
+      <volume>320</volume>
+      <issue>5876</issue>
+      <issn>0036-8075, 1095-9203</issn>
+      <pub-id pub-id-type="doi">10.1126/science.1156269</pub-id>
+      <fpage>658</fpage>
+      <lpage>661</lpage>
+    </element-citation>
+  </ref>
   <ref id="ref-Blondel2008FasUnf">
     <element-citation publication-type="article-journal">
       <person-group person-group-type="author">
@@ -598,6 +628,27 @@ draft" vocab-term-identifier="https://credit.niso.org/contributor-roles/writing-
       <lpage>41</lpage>
     </element-citation>
   </ref>
+  <ref id="ref-Gauzens2013FooAgg">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Gauzens</surname><given-names>Benoît</given-names></name>
+        <name><surname>Legendre</surname><given-names>Stéphane</given-names></name>
+        <name><surname>Lazzaro</surname><given-names>Xavier</given-names></name>
+        <name><surname>Lacroix</surname><given-names>Gérard</given-names></name>
+      </person-group>
+      <article-title>Food-web aggregation, methodological and functional issues</article-title>
+      <source>Oikos</source>
+      <publisher-name>[Nordic Society Oikos, Wiley]</publisher-name>
+      <year iso-8601-date="2013">2013</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2022-09-26">2022</year><month>09</month><day>26</day></date-in-citation>
+      <volume>122</volume>
+      <issue>11</issue>
+      <issn>0030-1299</issn>
+      <uri>https://www.jstor.org/stable/24567396</uri>
+      <fpage>1606</fpage>
+      <lpage>1615</lpage>
+    </element-citation>
+  </ref>
   <ref id="ref-Good2010PerMod">
     <element-citation publication-type="article-journal">
       <person-group person-group-type="author">
@@ -727,6 +778,31 @@ draft" vocab-term-identifier="https://credit.niso.org/contributor-roles/writing-
       <pub-id pub-id-type="doi">10.1103/PhysRevE.69.026113</pub-id>
       <fpage>026113</fpage>
       <lpage></lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-OConnor2020UnvFoo">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>O’Connor</surname><given-names>Louise M. J.</given-names></name>
+        <name><surname>Pollock</surname><given-names>Laura J.</given-names></name>
+        <name><surname>Braga</surname><given-names>João</given-names></name>
+        <name><surname>Ficetola</surname><given-names>Gentile Francesco</given-names></name>
+        <name><surname>Maiorano</surname><given-names>Luigi</given-names></name>
+        <name><surname>Martinez-Almoyna</surname><given-names>Camille</given-names></name>
+        <name><surname>Montemaggiori</surname><given-names>Alessandro</given-names></name>
+        <name><surname>Ohlmann</surname><given-names>Marc</given-names></name>
+        <name><surname>Thuiller</surname><given-names>Wilfried</given-names></name>
+      </person-group>
+      <article-title>Unveiling the food webs of tetrapods across Europe through the prism of the Eltonian niche</article-title>
+      <source>Journal of Biogeography</source>
+      <year iso-8601-date="2020">2020</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2024-05-14">2024</year><month>05</month><day>14</day></date-in-citation>
+      <volume>47</volume>
+      <issue>1</issue>
+      <issn>1365-2699</issn>
+      <pub-id pub-id-type="doi">10.1111/jbi.13773</pub-id>
+      <fpage>181</fpage>
+      <lpage>192</lpage>
     </element-citation>
   </ref>
   <ref id="ref-Peixoto2014HieBlo">
