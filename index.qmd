@@ -45,7 +45,7 @@ for robustly identifying modules in networks [@Good2010PerMod;
 As an alternative, we suggest methods for community detection based on
 Stochastic Block Models [@Karrer2011StoBlo;@Peixoto2014HieBlo; @Yen2020ComDet]
 for identifying modules in ecological networks.  Although they have seen some
-use in ecological networks [@Allesina2008GenMod; @Gauzens2013FooAgg;
+use in ecological networks [@Allesina2009FooWeb; @Gauzens2013FooAgg;
 @OConnor2020UnvFoo], modularity is still predominantly used in network ecology.
 In a brief literature survey, we found MM methods overwhelmingly prevelent in
 the analysis of ecological networks.  Here we cover what modularity maximization
