@@ -452,6 +452,8 @@ draft" vocab-term-identifier="https://credit.niso.org/contributor-roles/writing-
     is <italic>itself</italic> another SBM. This enables multi-scale
     community detection that can circumvent the issue of resolution
     limits from modularity maximization.</p>
+    <p>For a thorough review of block modeling, see Lee and Wilkinson
+    (<xref alt="2019" rid="ref-Lee2019RevSto" ref-type="bibr">2019</xref>).</p>
   </sec>
 </sec>
 <sec id="conclusion">
@@ -760,6 +762,25 @@ draft" vocab-term-identifier="https://credit.niso.org/contributor-roles/writing-
       <pub-id pub-id-type="doi">10.1103/PhysRevE.84.066122</pub-id>
       <fpage>066122</fpage>
       <lpage></lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-Lee2019RevSto">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Lee</surname><given-names>Clement</given-names></name>
+        <name><surname>Wilkinson</surname><given-names>Darren J.</given-names></name>
+      </person-group>
+      <article-title>A review of stochastic block models and extensions for graph clustering</article-title>
+      <source>Applied Network Science</source>
+      <publisher-name>SpringerOpen</publisher-name>
+      <year iso-8601-date="2019">2019</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2024-05-14">2024</year><month>05</month><day>14</day></date-in-citation>
+      <volume>4</volume>
+      <issue>1</issue>
+      <issn>2364-8228</issn>
+      <pub-id pub-id-type="doi">10.1007/s41109-019-0232-2</pub-id>
+      <fpage>1</fpage>
+      <lpage>50</lpage>
     </element-citation>
   </ref>
   <ref id="ref-Newman2004FinEva">
