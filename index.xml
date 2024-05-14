@@ -451,8 +451,13 @@ draft" vocab-term-identifier="https://credit.niso.org/contributor-roles/writing-
     <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:msub><mml:mi>𝐌</mml:mi><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mi>i</mml:mi></mml:msub><mml:msub><mml:mi>b</mml:mi><mml:mi>j</mml:mi></mml:msub></mml:mrow></mml:msub></mml:math></alternatives></inline-formula>
     is <italic>itself</italic> another SBM. This enables multi-scale
     community detection that can circumvent the issue of resolution
-    limits from modularity maximization.</p>
-    <p>For a thorough review of block modeling, see Lee and Wilkinson
+    limits from modularity maximization. Modern methods include the
+    <italic>microcanonical version</italic> of both the DC-SBM and NSBM
+    (<xref alt="Peixoto 2017" rid="ref-Peixoto2017NonBay" ref-type="bibr">Peixoto
+    2017</xref>). Here <italic>microcanonical</italic> is terminology
+    being adopted from statistical mechanics, and in practice means
+    these models are defined for networks with a fixed degree sequence.
+    For a thorough review of block modeling, see Lee and Wilkinson
     (<xref alt="2019" rid="ref-Lee2019RevSto" ref-type="bibr">2019</xref>).</p>
   </sec>
 </sec>
@@ -840,6 +845,23 @@ draft" vocab-term-identifier="https://credit.niso.org/contributor-roles/writing-
       <issue>1</issue>
       <pub-id pub-id-type="doi">10.1103/PhysRevX.4.011047</pub-id>
       <fpage>011047</fpage>
+      <lpage></lpage>
+    </element-citation>
+  </ref>
+  <ref id="ref-Peixoto2017NonBay">
+    <element-citation publication-type="article-journal">
+      <person-group person-group-type="author">
+        <name><surname>Peixoto</surname><given-names>Tiago P.</given-names></name>
+      </person-group>
+      <article-title>Nonparametric Bayesian inference of the microcanonical stochastic block model</article-title>
+      <source>Physical Review E</source>
+      <year iso-8601-date="2017">2017</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2024-05-14">2024</year><month>05</month><day>14</day></date-in-citation>
+      <volume>95</volume>
+      <issue>1</issue>
+      <issn>2470-0045, 2470-0053</issn>
+      <pub-id pub-id-type="doi">10.1103/PhysRevE.95.012317</pub-id>
+      <fpage>012317</fpage>
       <lpage></lpage>
     </element-citation>
   </ref>
