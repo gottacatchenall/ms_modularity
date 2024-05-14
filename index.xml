@@ -137,8 +137,8 @@ draft" vocab-term-identifier="https://credit.niso.org/contributor-roles/writing-
   <xref alt="Yen and Larremore 2020" rid="ref-Yen2020ComDet" ref-type="bibr">Yen
   and Larremore 2020</xref>) for identifying modules in ecological
   networks. Although they have seen some use in ecological networks
-  (<xref alt="Allesina, Alonso, and Pascual 2008" rid="ref-Allesina2008GenMod" ref-type="bibr">Allesina,
-  Alonso, and Pascual 2008</xref>;
+  (<xref alt="Allesina and Pascual 2009" rid="ref-Allesina2009FooWeb" ref-type="bibr">Allesina
+  and Pascual 2009</xref>;
   <xref alt="Gauzens et al. 2013" rid="ref-Gauzens2013FooAgg" ref-type="bibr">Gauzens
   et al. 2013</xref>;
   <xref alt="O’Connor et al. 2020" rid="ref-OConnor2020UnvFoo" ref-type="bibr">O’Connor
@@ -483,23 +483,22 @@ draft" vocab-term-identifier="https://credit.niso.org/contributor-roles/writing-
 
 <back>
 <ref-list>
-  <ref id="ref-Allesina2008GenMod">
+  <ref id="ref-Allesina2009FooWeb">
     <element-citation publication-type="article-journal">
       <person-group person-group-type="author">
-        <name><surname>Allesina</surname><given-names>S.</given-names></name>
-        <name><surname>Alonso</surname><given-names>D.</given-names></name>
-        <name><surname>Pascual</surname><given-names>M.</given-names></name>
+        <name><surname>Allesina</surname><given-names>Stefano</given-names></name>
+        <name><surname>Pascual</surname><given-names>Mercedes</given-names></name>
       </person-group>
-      <article-title>A General Model for Food Web Structure</article-title>
-      <source>Science</source>
-      <year iso-8601-date="2008">2008</year>
-      <date-in-citation content-type="access-date"><year iso-8601-date="2020-07-08">2020</year><month>07</month><day>08</day></date-in-citation>
-      <volume>320</volume>
-      <issue>5876</issue>
-      <issn>0036-8075, 1095-9203</issn>
-      <pub-id pub-id-type="doi">10.1126/science.1156269</pub-id>
-      <fpage>658</fpage>
-      <lpage>661</lpage>
+      <article-title>Food web models: A plea for groups</article-title>
+      <source>Ecology Letters</source>
+      <year iso-8601-date="2009">2009</year>
+      <date-in-citation content-type="access-date"><year iso-8601-date="2024-05-14">2024</year><month>05</month><day>14</day></date-in-citation>
+      <volume>12</volume>
+      <issue>7</issue>
+      <issn>1461-0248</issn>
+      <pub-id pub-id-type="doi">10.1111/j.1461-0248.2009.01321.x</pub-id>
+      <fpage>652</fpage>
+      <lpage>662</lpage>
     </element-citation>
   </ref>
   <ref id="ref-Blondel2008FasUnf">
