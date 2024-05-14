@@ -108,16 +108,16 @@ called the _resolution limit_ [@Fortunato2007ResLim]).
 
 The first issue with modularity maximization is the the modularity function $Q$ 
 has many local optima, with similar values of $Q$, but which correspond to 
-qualitatively very different partitions $\vec{b}$. This was first reported in  
-@Good2010PerMod, who also show that $Q_max$ is highly dependent on the number of 
-clusters and the size of the network, and conclude---"[the] modules identified 
-through modularity maximization should be treated with caution in all but the
+qualitatively very different partitions $\vec{b}$. This was first reported in @Good2010PerMod,
+who also show that $Q_{max}$ is highly dependent on the number of clusters and 
+the size of the network, and conclude---"[the] modules identified through 
+modularity maximization should be treated with caution in all but the 
 most straightforward cases" [@Good2010PerMod].
 
 
 ![The issue with modularity maxmimization: there are many local optima with similar $Q$ values that correspond to qualitatively very different group partitions.]
 
-[The issue with modularity maxmimization: there are many local optima with similar $Q$ values that correspond to qualitatively very different group partitions.]: figures/bumpy.png {#fig-embedding}
+[The issue with modularity maxmimization: there are many local optima with similar $Q$ values that correspond to qualitatively very different group partitions.]: figures/bumpy.png {#fig-modularity-maximization}
 
 ### Underfitting via the resolution limit
 
@@ -177,7 +177,9 @@ core-periphery (where a set of densely connected nodes form a 'core', and other
 'periphery' nodes that have few edges and tend to be attached to core nodes ),
 and ordered (like trophic levels in a food-web).
 
-![Adapted from @Clauset2022LecNot. Shows how SBMs can account for community structure beyond simple assortativity.](./figures/blockmatrix.png)
+!["Adapted from @Clauset2022LecNot. The mixing matrix $\mathbf{M}$ for different SBMs that account for different types of community structure."]
+
+["Adapted from @Clauset2022LecNot. The mixing matrix $\mathbf{M}$ for different SBMs that account for different types of community structure."]: figures/blockmatrix.png {#fig-blocks}
 
 
 ### How do we infer community structure from stochastic block models?
