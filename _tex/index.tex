@@ -318,12 +318,11 @@ function}\label{overfitting-via-a-poor-choice-of-objective-function}}
 The first issue with modularity maximization is the the modularity
 function \(Q\) has many local optima, with similar values of \(Q\), but
 which correspond to qualitatively very different partitions \(\vec{b}\).
-This was first reported in\\
-Good \emph{et al.} (2010), who also show that \(Q_max\) is highly
-dependent on the number of clusters and the size of the network, and
-conclude---``{[}the{]} modules identified through modularity
-maximization should be treated with caution in all but the most
-straightforward cases'' (Good \emph{et al.} 2010).
+This was first reported in Good \emph{et al.} (2010), who also show that
+\(Q_{max}\) is highly dependent on the number of clusters and the size
+of the network, and conclude---``{[}the{]} modules identified through
+modularity maximization should be treated with caution in all but the
+most straightforward cases'' (Good \emph{et al.} 2010).
 
 \begin{figure}
 
@@ -331,9 +330,9 @@ straightforward cases'' (Good \emph{et al.} 2010).
 
 }
 
-\caption{\label{fig-embedding}The issue with modularity maxmimization:
-there are many local optima with similar \(Q\) values that correspond to
-qualitatively very different group partitions.}
+\caption{\label{fig-modularity-maximization}The issue with modularity
+maxmimization: there are many local optima with similar \(Q\) values
+that correspond to qualitatively very different group partitions.}
 
 \end{figure}
 
@@ -409,12 +408,13 @@ ordered (like trophic levels in a food-web).
 
 \begin{figure}
 
-{\centering \includegraphics{./figures/blockmatrix.png}
+{\centering \includegraphics{figures/blockmatrix.png}
 
 }
 
-\caption{Adapted from Clauset (2022). Shows how SBMs can account for
-community structure beyond simple assortativity.}
+\caption{\label{fig-blocks}``Adapted from Clauset (2022). The mixing
+matrix \(\mathbf{M}\) for different SBMs that account for different
+types of community structure.''}
 
 \end{figure}
 

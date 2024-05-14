@@ -300,19 +300,18 @@ draft" vocab-term-identifier="https://credit.niso.org/contributor-roles/writing-
     <inline-formula><alternatives>
     <tex-math><![CDATA[\vec{b}]]></tex-math>
     <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mover><mml:mi>b</mml:mi><mml:mo accent="true">⃗</mml:mo></mml:mover></mml:math></alternatives></inline-formula>.
-    This was first reported in
-    Good, de Montjoye, and Clauset
+    This was first reported in Good, de Montjoye, and Clauset
     (<xref alt="2010" rid="ref-Good2010PerMod" ref-type="bibr">2010</xref>),
     who also show that <inline-formula><alternatives>
-    <tex-math><![CDATA[Q_max]]></tex-math>
-    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:msub><mml:mi>Q</mml:mi><mml:mi>m</mml:mi></mml:msub><mml:mi>a</mml:mi><mml:mi>x</mml:mi></mml:mrow></mml:math></alternatives></inline-formula>
+    <tex-math><![CDATA[Q_{max}]]></tex-math>
+    <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:msub><mml:mi>Q</mml:mi><mml:mrow><mml:mi>m</mml:mi><mml:mi>a</mml:mi><mml:mi>x</mml:mi></mml:mrow></mml:msub></mml:math></alternatives></inline-formula>
     is highly dependent on the number of clusters and the size of the
     network, and conclude—“[the] modules identified through modularity
     maximization should be treated with caution in all but the most
     straightforward cases”
     (<xref alt="Good, de Montjoye, and Clauset 2010" rid="ref-Good2010PerMod" ref-type="bibr">Good,
     de Montjoye, and Clauset 2010</xref>).</p>
-    <fig id="fig-embedding">
+    <fig id="fig-modularity-maximization">
       <caption><p>Figure 1: The issue with modularity maxmimization:
       there are many local optima with similar
       <inline-formula><alternatives>
@@ -417,10 +416,16 @@ draft" vocab-term-identifier="https://credit.niso.org/contributor-roles/writing-
     densely connected nodes form a ‘core’, and other ‘periphery’ nodes
     that have few edges and tend to be attached to core nodes ), and
     ordered (like trophic levels in a food-web).</p>
-    <graphic mimetype="image" mime-subtype="png" xlink:href="./figures/blockmatrix.png">
-      <alt-text>Adapted from Clauset (2022). Shows how SBMs can account
-      for community structure beyond simple assortativity.</alt-text>
-    </graphic>
+    <fig id="fig-blocks">
+      <caption><p>Figure 2: “Adapted from Clauset
+      (<xref alt="2022" rid="ref-Clauset2022LecNot" ref-type="bibr">2022</xref>).
+      The mixing matrix <inline-formula><alternatives>
+      <tex-math><![CDATA[\mathbf{M}]]></tex-math>
+      <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>𝐌</mml:mi></mml:math></alternatives></inline-formula>
+      for different SBMs that account for different types of community
+      structure.”</p></caption>
+      <graphic mimetype="image" mime-subtype="png" xlink:href="figures/blockmatrix.png" />
+    </fig>
   </sec>
   <sec id="how-do-we-infer-community-structure-from-stochastic-block-models">
     <title>How do we infer community structure from stochastic block
