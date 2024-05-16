@@ -243,8 +243,8 @@ draft" vocab-term-identifier="https://credit.niso.org/contributor-roles/writing-
   <tex-math><![CDATA[i]]></tex-math>
   <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>i</mml:mi></mml:math></alternatives></inline-formula>
   belongs to, and how many total groups <inline-formula><alternatives>
-  <tex-math><![CDATA[|\vec{b}|]]></tex-math>
-  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mrow><mml:mo stretchy="true" form="prefix">|</mml:mo><mml:mover><mml:mi>b</mml:mi><mml:mo accent="true">⃗</mml:mo></mml:mover><mml:mo stretchy="true" form="postfix">|</mml:mo></mml:mrow></mml:math></alternatives></inline-formula>
+  <tex-math><![CDATA[\mathcal{B}]]></tex-math>
+  <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:mi>ℬ</mml:mi></mml:math></alternatives></inline-formula>
   there are total (in network science literature, this problem is called
   <italic>community detection</italic>). MM originated during the
   mid-2000s
@@ -456,27 +456,30 @@ draft" vocab-term-identifier="https://credit.niso.org/contributor-roles/writing-
     <xref alt="Karrer and Newman 2011" rid="ref-Karrer2011StoBlo" ref-type="bibr">Karrer
     and Newman 2011</xref>), which explicitly accounts for the degree
     distribution by including the empirical degree sequence in the
-    likelihood of observing each graph. Yen and Larremore
-    (<xref alt="2020" rid="ref-Yen2020ComDet" ref-type="bibr">2020</xref>)
-    develops a model specifically for bipartite networks, where the
-    bipartite structure is directly incorporated into the generative
-    model, improving performance for detecting communities in bipartite
-    networks. Another promising line of research is hierarchical/nested
-    SBMs (NSBMs), first proposed by Peixoto
-    (<xref alt="2014" rid="ref-Peixoto2014HieBlo" ref-type="bibr">2014</xref>).
-    In NSBMs, each “block” <inline-formula><alternatives>
+    likelihood of observing each graph.</p>
+    <p>Nested SBMs
+    (<xref alt="Peixoto 2014" rid="ref-Peixoto2014HieBlo" ref-type="bibr">Peixoto
+    2014</xref>). In NSBMs, each “block” <inline-formula><alternatives>
     <tex-math><![CDATA[\mathbf{M}_{b_i b_j}]]></tex-math>
     <mml:math display="inline" xmlns:mml="http://www.w3.org/1998/Math/MathML"><mml:msub><mml:mi>𝐌</mml:mi><mml:mrow><mml:msub><mml:mi>b</mml:mi><mml:mi>i</mml:mi></mml:msub><mml:msub><mml:mi>b</mml:mi><mml:mi>j</mml:mi></mml:msub></mml:mrow></mml:msub></mml:math></alternatives></inline-formula>
     is <italic>itself</italic> another SBM. This enables multi-scale
     community detection that can circumvent the issue of resolution
-    limits from modularity maximization. Modern methods include the
+    limits from modularity maximization.</p>
+    <p>Modern work on SBMs typically focuses on variants of the
     <italic>microcanonical version</italic> of both the DC-SBM and NSBM
     (<xref alt="Peixoto 2017" rid="ref-Peixoto2017NonBay" ref-type="bibr">Peixoto
     2017</xref>). Here <italic>microcanonical</italic> is terminology
-    being adopted from statistical mechanics, and in practice means
-    these models are defined for networks with a fixed degree sequence.
-    For a thorough review of block modeling, see Lee and Wilkinson
+    being adopted from statistical mechanics, which in practice means
+    these models are defined for a fixed degree sequence (number of
+    edges per nodes). For a thorough recent-ish review of block
+    modeling, see Lee and Wilkinson
     (<xref alt="2019" rid="ref-Lee2019RevSto" ref-type="bibr">2019</xref>).</p>
+    <p>Yen and Larremore
+    (<xref alt="2020" rid="ref-Yen2020ComDet" ref-type="bibr">2020</xref>)
+    develops a model specifically for bipartite networks, where the
+    bipartite structure is directly incorporated into the likelihood,
+    improving performance for detecting communities in bipartite
+    networks over DC-SBM.</p>
   </sec>
 </sec>
 <sec id="conclusion">
