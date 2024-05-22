@@ -137,11 +137,7 @@ draft" vocab-term-identifier="https://credit.niso.org/contributor-roles/writing-
   <xref alt="Yen and Larremore 2020" rid="ref-Yen2020ComDet" ref-type="bibr">Yen
   and Larremore 2020</xref>) for identifying modules in ecological
   networks. Although they have seen some use in ecological networks
-  (<xref alt="Allesina and Pascual 2009" rid="ref-Allesina2009FooWeb" ref-type="bibr">Allesina
-  and Pascual 2009</xref>;
-  <xref alt="Gauzens et al. 2013" rid="ref-Gauzens2013FooAgg" ref-type="bibr">Gauzens
-  et al. 2013</xref>;
-  <xref alt="O’Connor et al. 2020" rid="ref-OConnor2020UnvFoo" ref-type="bibr">O’Connor
+  (<xref alt="O’Connor et al. 2020" rid="ref-OConnor2020UnvFoo" ref-type="bibr">O’Connor
   et al. 2020</xref>), modularity is still predominantly used in network
   ecology. In a brief literature survey, we found MM methods
   overwhelmingly prevelent in the analysis of ecological networks. Here
@@ -504,24 +500,6 @@ draft" vocab-term-identifier="https://credit.niso.org/contributor-roles/writing-
 
 <back>
 <ref-list>
-  <ref id="ref-Allesina2009FooWeb">
-    <element-citation publication-type="article-journal">
-      <person-group person-group-type="author">
-        <name><surname>Allesina</surname><given-names>Stefano</given-names></name>
-        <name><surname>Pascual</surname><given-names>Mercedes</given-names></name>
-      </person-group>
-      <article-title>Food web models: A plea for groups</article-title>
-      <source>Ecology Letters</source>
-      <year iso-8601-date="2009">2009</year>
-      <date-in-citation content-type="access-date"><year iso-8601-date="2024-05-14">2024</year><month>05</month><day>14</day></date-in-citation>
-      <volume>12</volume>
-      <issue>7</issue>
-      <issn>1461-0248</issn>
-      <pub-id pub-id-type="doi">10.1111/j.1461-0248.2009.01321.x</pub-id>
-      <fpage>652</fpage>
-      <lpage>662</lpage>
-    </element-citation>
-  </ref>
   <ref id="ref-Blondel2008FasUnf">
     <element-citation publication-type="article-journal">
       <person-group person-group-type="author">
@@ -653,27 +631,6 @@ draft" vocab-term-identifier="https://credit.niso.org/contributor-roles/writing-
       <pub-id pub-id-type="doi">10.1073/pnas.0605965104</pub-id>
       <fpage>36</fpage>
       <lpage>41</lpage>
-    </element-citation>
-  </ref>
-  <ref id="ref-Gauzens2013FooAgg">
-    <element-citation publication-type="article-journal">
-      <person-group person-group-type="author">
-        <name><surname>Gauzens</surname><given-names>Benoît</given-names></name>
-        <name><surname>Legendre</surname><given-names>Stéphane</given-names></name>
-        <name><surname>Lazzaro</surname><given-names>Xavier</given-names></name>
-        <name><surname>Lacroix</surname><given-names>Gérard</given-names></name>
-      </person-group>
-      <article-title>Food-web aggregation, methodological and functional issues</article-title>
-      <source>Oikos</source>
-      <publisher-name>[Nordic Society Oikos, Wiley]</publisher-name>
-      <year iso-8601-date="2013">2013</year>
-      <date-in-citation content-type="access-date"><year iso-8601-date="2022-09-26">2022</year><month>09</month><day>26</day></date-in-citation>
-      <volume>122</volume>
-      <issue>11</issue>
-      <issn>0030-1299</issn>
-      <uri>https://www.jstor.org/stable/24567396</uri>
-      <fpage>1606</fpage>
-      <lpage>1615</lpage>
     </element-citation>
   </ref>
   <ref id="ref-Good2010PerMod">
